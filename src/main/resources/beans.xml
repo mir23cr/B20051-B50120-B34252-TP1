@@ -1,0 +1,49 @@
+<beans default-init-method="init" default-destroy-method="destroy">
+
+	<!--<context:component-scan base-package="cr.ac.ucr.ecci.ci1312.ubung.core"/> Este tag se usa para decir que el proyecto va a utilizar annotations-->
+	
+	<!-- Se pueden usar annotations y XML en el mismo proyecto (como en el caso de este ejemplo) -->
+
+	<!-- Se pueden usar las siguientas tags:
+
+		- bean	(id, class, scope, init-method, destroy-method, autowiring)
+		- property	(name, value, ref)
+		- constructor-arg	(type, value)
+
+	 -->
+
+	<!--  Si el bean tiene como scope singleton, debe especificarse el destroy-method  -->
+	<bean id="Xenon 17" class="com.mkyong.core.Processor" scope="singleton" init-method="run" destroy-method="close">
+		<constructor-arg type="int" value="2001" />
+		<constructor-arg ref = "Server 03"  />
+		<property name="CacheLvl3" value="6MB"/>
+		<property name="Speed" value="2.0 GHZ" />
+		<property name="Cores" value="5" />
+	</bean>
+
+	<bean id="Personal Computer 10" class="com.mkyong.core.PersonalComputer" scope="prototype">
+		<constructor-arg index = "0" value="Hola" />
+		<property name="processor" ref="Xenon 17"/>
+		<property name="memory" value="8GB" />
+		<property name="operativeSystem" value="Ubuntu 17.04" />
+		<property name="hardDriveCapacity" value="1TB" />
+	</bean>
+
+	<bean id="Server 03" class="com.mkyong.core.Server" scope="singleton" destroy-method="close">
+		<property name="processor" ref="Xenon 17"/>
+		<property name="memory" value="32GB" />
+		<property name="operativeSystem" value="CentOS 10" />
+		<property name="hardDriveCapacity" value="10TB" />
+	</bean>
+
+	<bean id="Server 04" class="com.mkyong.core.Server" scope="prototype" >
+		<property name="processor" ref="Xenon 17"/>
+		<property name="memory" value="16GB" />
+		<property name="operativeSystem" value="Fedora 10" />
+		<property name="hardDriveCapacity" value="5TB" />
+	</bean>
+
+	<!--  Si se especifica el autowiring, no hace falta especificar constructor-args ni properties  -->
+	<bean id="Server 05" class="com.mkyong.core.Server" scope="singleton" init-method="run" destroy-method="close"> </bean>
+
+</beans>
