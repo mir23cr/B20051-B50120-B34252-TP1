@@ -1,7 +1,13 @@
 package context;
 
-/**
- * Created by Rodrigo on 9/9/2017.
- */
-public interface ApplicationContextInterface {
+public interface ApplicationContextInterface
+{
+    Object getBean(String beanId);
+    <T> T getBean(Class<T> classType, String beanId);
+    boolean containsBean(String beanId);
+    boolean isSingleton(String beanId);
+    boolean isPrototype(String beanId);
+    void registerBeans();
+    void injectDependencies();
+    void close();
 }
