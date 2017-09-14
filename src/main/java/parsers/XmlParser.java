@@ -6,9 +6,12 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import bean.AutowireMode;
 import bean.Bean;
 import bean.Parameter;
 import bean.Scope;
+import javafx.util.Pair;
 import nu.xom.*;
 
 /**
@@ -29,7 +32,7 @@ public class XmlParser implements Parser {
         this.beansDefinition = new HashMap<String, Bean>();
     }
 
-    public void getBeans(String fileName) throws ParsingException, IOException {
+    public Map<String, Bean> getBeans(String fileName) throws ParsingException, IOException {
         Bean newBean;
         Document document = parser.build(this.getClass().getClassLoader().getResourceAsStream(fileName));
         Element root = document.getRootElement();
@@ -37,10 +40,9 @@ public class XmlParser implements Parser {
 
         for (int i = 0; i < children.size(); i++) {
             newBean = this.createBean(children.get(i));
-
+            this.beansDefinition.put(newBean.getId(),newBean);
         }
-
-
+        return this.beansDefinition;
     }
 
     public Bean createBean(Element beanDefinition){
@@ -72,11 +74,14 @@ public class XmlParser implements Parser {
                         //System.out.print("Se vio un scope ");
                         newBean.setScopeType(Scope.valueOf(propertyValue.toUpperCase()));
                         break;
+                    case AUTOWIRING:
+                        newBean.setAutowireMode(AutowireMode.valueOf(propertyValue.toUpperCase()));
+                        break;
                     default:
                         //System.out.println("Error");
                         break;
                 }
-                System.out.println(beanDefinition.getAttribute(j).getValue());
+                //System.out.println(beanDefinition.getAttribute(j).getValue());
             }
 
             this.getBeanArgs(beanDefinition.getChildElements(), newBean);
@@ -118,6 +123,9 @@ public class XmlParser implements Parser {
                     break;
             }
         }
+        newBean.setConstructorArguments(constructorArgs);
+        newBean.setProperties(properties);
+        newBean.setBeanDependencies(nestedBeans);
     }
 
     private Parameter getConstructorInformation(Element info){
@@ -165,8 +173,16 @@ public class XmlParser implements Parser {
     {
         try {
             XmlParser xmlParser = new XmlParser();
-            xmlParser.getBeans("beans.xml");
-
+            Map<String,Bean> container = xmlParser.getBeans("beans.xml");
+            Bean bean;
+            for (Map.Entry<String,Bean> element : container.entrySet()){
+                System.out.println(element.getKey());
+                bean = element.getValue();
+                System.out.println(bean.getAutowireMode());
+                System.out.println(bean.getConstructorArguments().size());
+                System.out.println(bean.getProperties().size());
+                System.out.println(bean.getBeanDependencies().size());
+            }
         }catch(Exception e){
             e.printStackTrace();
         }

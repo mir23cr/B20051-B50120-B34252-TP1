@@ -28,9 +28,10 @@
 
 	<bean id="Server 04" class="com.mkyong.core.Server" scope="prototype" >
 		<property name="processor" ref="Xenon 17"/>
+		<bean id="Server 08" class="com.mkyong.core.Server" scope="singleton" init-method="run" destroy-method="close" autowiring="byType"> </bean>
 	</bean>
 
 	<!--  Si se especifica el autowiring, no hace falta especificar constructor-args ni properties  -->
-	<bean id="Server 05" class="com.mkyong.core.Server" scope="singleton" init-method="run" destroy-method="close"> </bean>
+	<bean id="Server 05" class="com.mkyong.core.Server" scope="singleton" init-method="run" destroy-method="close" autowiring="byType"> </bean>
 
 </beans>

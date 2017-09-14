@@ -105,4 +105,12 @@ public class Bean
     public void setProperties(List<Parameter> properties) {
         this.properties = properties;
     }
+
+    public List<Bean> getBeanDependencies() {
+        return beanDependencies;
+    }
+
+    public void setBeanDependencies(List<Bean> beanDependencies) {
+        this.beanDependencies = beanDependencies;
+    }
 }
