@@ -5,7 +5,7 @@ import parsers.XmlParser;
 /**
  * Created by Rodrigo on 9/9/2017.
  */
-public class XmlApplicationContext extends ApplicationContext {
+public  class XmlApplicationContext extends ApplicationContext {
     private XmlParser xmlParser;
 
     public Object getBean(String beanId) {
