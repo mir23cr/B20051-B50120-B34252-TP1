@@ -2,5 +2,7 @@ package bean;
 
 public enum AutowireMode
 {
-    BYNAME, BYTYPE
+    BYNAME,
+    BYTYPE,
+    NO;
 }

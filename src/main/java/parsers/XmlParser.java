@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import bean.Bean;
+import bean.Scope;
 import nu.xom.*;
 
 /**
@@ -17,6 +18,8 @@ public class XmlParser implements Parser {
 
     private Builder parser;
     private Map<String,Bean> beansDefinition;
+    private Bean newBean;
+
 
     public XmlParser(){
         this.parser = new Builder();
@@ -24,48 +27,59 @@ public class XmlParser implements Parser {
     }
 
     public void getBeans(String fileName) throws ParsingException, IOException {
-        Bean newBean;
+
         Document document = parser.build(this.getClass().getClassLoader().getResourceAsStream(fileName));
         Element root = document.getRootElement();
         Elements children = root.getChildElements(ParserStringConstants.BEAN_LABEL);
 
         for (int i = 0; i < children.size(); i++) {
-            newBean = this.getBean(children.get(i));
+            this.createBean(children.get(i));
         }
 
     }
 
-    public Bean getBean(Element beanDefinition){
-        Bean newBean = new Bean();
-        Elements beanArgs;
-
-        for(int j = 0; j < beanDefinition.getAttributeCount(); j++) {
-            switch (BeanProperty.getProperty(beanDefinition.getAttribute(j).getLocalName())){
-                case ID:
-                    System.out.print("Se vio un id ");
-                    break;
-                case CLASS:
-                    System.out.print("Se vio un class ");
-                    break;
-                case INIT:
-                    System.out.print("Se vio un init ");
-                    break;
-                case DESTROY:
-                    System.out.print("Se vio un destroy ");
-                    break;
-                case SCOPE:
-                    System.out.print("Se vio un scope ");
-                    break;
-                default:
-                    System.out.print("Error");
-                    break;
+    public void createBean(Element beanDefinition){
+        try{
+            this.newBean = new Bean();
+            Elements beanArgs;
+            BeanProperty beanProperty;
+            String propertyValue;
+            for(int j = 0; j < beanDefinition.getAttributeCount(); j++) {
+                beanProperty = BeanProperty.getProperty(beanDefinition.getAttribute(j).getLocalName());
+                propertyValue = beanDefinition.getAttribute(j).getValue();
+                switch (beanProperty){
+                    case ID:
+                        System.out.print("Se vio un id ");
+                        newBean.setId(propertyValue);
+                        break;
+                    case CLASS:
+                        System.out.print("Se vio un class ");
+                        newBean.setClassType(propertyValue);
+                        break;
+                    case INIT:
+                        System.out.print("Se vio un init ");
+                        newBean.setInit(propertyValue);
+                        break;
+                    case DESTROY:
+                        System.out.print("Se vio un destroy ");
+                        newBean.setDestroy(propertyValue);
+                        break;
+                    case SCOPE:
+                        System.out.print("Se vio un scope ");
+                        newBean.setScopeType(Scope.valueOf(propertyValue.toUpperCase()));
+                        break;
+                    default:
+                        System.out.print("Error");
+                        break;
+                }
+                System.out.println(beanDefinition.getAttribute(j).getValue());
             }
-            System.out.println(beanDefinition.getAttribute(j).getValue());
-        }
 
-        beanArgs = beanDefinition.getChildElements();
-        getBeanArgs(beanArgs);
-        return newBean;
+            beanArgs = beanDefinition.getChildElements();
+            getBeanArgs(beanArgs);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void getBeanArgs(Elements beanArgs){
