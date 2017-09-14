@@ -1,24 +1,29 @@
 package bean;
 
+import java.util.LinkedList;
 import java.util.List;
 import javafx.util.Pair;
 
 public class Bean
 {
-    String id;
-    Object instance;
-    String classType;
-    List<Class<?>> implementedInterfaces;
-    String init;
-    String destroy;
-    AutowireMode autowireMode;
-    Scope scopeType;
-    List<Parameter> constructorArguments;
-    List<Pair<String,Parameter>> properties;
+    private String id;
+    private Object instance;
+    private String classType;
+    private List<Class<?>> implementedInterfaces;
+    private String init;
+    private String destroy;
+    private AutowireMode autowireMode;
+    private Scope scopeType;
+    private List<Parameter> constructorArguments;
+    private List<Parameter> properties;
+    private List<Bean> beanDependencies;
 
     public Bean() {
         this.autowireMode = AutowireMode.NO;
         this.scopeType = Scope.SINGLETON;
+        this.constructorArguments = new LinkedList<Parameter>();
+        this.properties = new LinkedList<Parameter>();
+        this.beanDependencies = new LinkedList<Bean>();
     }
 
     public String getId() {
@@ -93,11 +98,11 @@ public class Bean
         this.constructorArguments = constructorArguments;
     }
 
-    public List<Pair<String, Parameter>> getProperties() {
+    public List<Parameter> getProperties() {
         return this.properties;
     }
 
-    public void setProperties(List<Pair<String, Parameter>> properties) {
+    public void setProperties(List<Parameter> properties) {
         this.properties = properties;
     }
 }
