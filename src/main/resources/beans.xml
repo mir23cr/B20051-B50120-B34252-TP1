@@ -1,6 +1,6 @@
 <beans default-init-method="init" default-destroy-method="destroy">
 
-	<!--<context:component-scan base-package="cr.ac.ucr.ecci.ci1312.ubung.core"/> Este tag se usa para decir que el proyecto va a utilizar annotations-->
+	<component-scan base-package="cr.ac.ucr.ecci.ci1312.ubung.core"/> <!--Este tag se usa para decir que el proyecto va a utilizar annotations-->
 	
 	<!-- Se pueden usar annotations y XML en el mismo proyecto (como en el caso de este ejemplo) -->
 
@@ -28,7 +28,8 @@
 
 	<bean id="Server 04" class="com.mkyong.core.Server" scope="prototype" >
 		<property name="processor" ref="Xenon 17"/>
-		<bean id="Server 08" class="com.mkyong.core.Server" scope="singleton" init-method="run" destroy-method="close" autowiring="byType"> </bean>
+		<bean id="Server 05" class="com.mkyong.core.Server" scope="singleton" init-method="run" destroy-method="close" autowiring="byType"> </bean>
+
 	</bean>
 
 	<!--  Si se especifica el autowiring, no hace falta especificar constructor-args ni properties  -->

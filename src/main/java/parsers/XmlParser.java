@@ -24,20 +24,42 @@ public class XmlParser implements Parser {
 
     private Builder parser;
     private Map<String,Bean> beansDefinition;
+    private String fileName;
     //private Bean newBean;
 
 
-    public XmlParser(){
+    public XmlParser(String fileName){
+        this.fileName = fileName;
         this.parser = new Builder();
         this.beansDefinition = new HashMap<String, Bean>();
     }
 
-    public Map<String, Bean> getBeans(String fileName) throws ParsingException, IOException {
-        Bean newBean;
-        Document document = parser.build(this.getClass().getClassLoader().getResourceAsStream(fileName));
+    public String getDefaultInitMethod() throws ParsingException, IOException {
+        Document document = parser.build(this.getClass().getClassLoader().getResourceAsStream(this.fileName));
         Element root = document.getRootElement();
-        Elements children = root.getChildElements(ParserStringConstants.BEAN_LABEL);
+        Attribute attribute = root.getAttribute(ParserStringConstants.BEANS_DEFAULT_INIT);
+        return (attribute!=null)? attribute.getValue():null;
+    }
 
+    public String getDefaultDestroyMethod() throws ParsingException, IOException {
+        Document document = parser.build(this.getClass().getClassLoader().getResourceAsStream(this.fileName));
+        Element root = document.getRootElement();
+        Attribute attribute = root.getAttribute(ParserStringConstants.BEANS_DEFAULT_DESTROY);
+        return (attribute!=null)? attribute.getValue():null;
+    }
+
+
+    public Map<String, Bean> getBeans() throws ParsingException, IOException {
+
+        Document document = parser.build(this.getClass().getClassLoader().getResourceAsStream(this.fileName));
+        Element root = document.getRootElement();
+        Element annotations = root.getFirstChildElement(ParserStringConstants.BEANS_SCAN_ANNOTATIONS);
+        if(annotations != null){
+            /*Hacer algo para parsear anotaciones*/
+            System.out.println("Hay que escanear paquete: " + annotations.getAttribute(ParserStringConstants.BEANS_SCAN_ANNOTATIONS_PACKAGE));
+        }
+        Elements children = root.getChildElements(ParserStringConstants.BEAN_LABEL);
+        Bean newBean;
         for (int i = 0; i < children.size(); i++) {
             newBean = this.createBean(children.get(i));
             this.beansDefinition.put(newBean.getId(),newBean);
@@ -172,8 +194,10 @@ public class XmlParser implements Parser {
     public static void main(final String[] args)
     {
         try {
-            XmlParser xmlParser = new XmlParser();
-            Map<String,Bean> container = xmlParser.getBeans("beans.xml");
+            XmlParser xmlParser = new XmlParser("beans.xml");
+            System.out.println(xmlParser.getDefaultInitMethod());
+            System.out.println(xmlParser.getDefaultDestroyMethod());
+            Map<String,Bean> container = xmlParser.getBeans();
             Bean bean;
             for (Map.Entry<String,Bean> element : container.entrySet()){
                 System.out.println(element.getKey());
