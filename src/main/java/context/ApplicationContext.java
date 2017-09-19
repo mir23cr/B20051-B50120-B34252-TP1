@@ -7,7 +7,9 @@ import java.util.Map;
 
 public abstract class ApplicationContext implements ApplicationContextInterface
 {
-    private Map<String,Bean> container;
+    protected Map<String,Bean> container;
+    protected String defaultInit;
+    protected String defaultDestroy;
 
     public ApplicationContext()
     {

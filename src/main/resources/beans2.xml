@@ -1,0 +1,20 @@
+<beans default-init-method="iniciar" default-destroy-method="destruir">
+
+	<bean id="home" class="tests.House" init-method="run" destroy-method="close">
+		<constructor-arg index = "1" ref="puchin" />
+		<constructor-arg index = "0" ref="pili" />
+		<property name = "dad" ref = "daddy"/>
+	</bean>
+
+	<bean id="daddy" class="tests.Person">
+	</bean>
+
+	<bean id="pili" class="tests.Dog">
+	</bean>
+	
+	<bean id="puchin" class="tests.Cat">
+	</bean>
+
+
+	
+</beans>

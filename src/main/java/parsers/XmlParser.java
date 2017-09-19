@@ -2,10 +2,7 @@ package parsers;
 
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import bean.AutowireMode;
 import bean.Bean;
@@ -120,9 +117,10 @@ public class XmlParser implements Parser {
         Element argument;
         Bean newNestedBean;
         Parameter newParameter;
-        List<Parameter> constructorArgs = new LinkedList<Parameter>();
-        List<Parameter> properties = new LinkedList<Parameter>();
-        List<Bean> nestedBeans = new LinkedList<Bean>();
+        List<Parameter> constructorArgs = new ArrayList<Parameter>();
+
+        List<Parameter> properties = new ArrayList<Parameter>();
+        List<Bean> nestedBeans = new ArrayList<Bean>();
         for(int i =0; i < beanArgs.size(); i++){
             argument = beanArgs.get(i);
             switch (BeanArgument.getArgument(argument.getLocalName())){
@@ -145,6 +143,9 @@ public class XmlParser implements Parser {
                     //System.out.println("Error!");
                     break;
             }
+        }
+        if(constructorArgs.size() > 0 && constructorArgs.get(0).getIndex() != null){
+            constructorArgs.sort(new ParameterIndexComparator());
         }
         newBean.setConstructorArguments(constructorArgs);
         newBean.setProperties(properties);
