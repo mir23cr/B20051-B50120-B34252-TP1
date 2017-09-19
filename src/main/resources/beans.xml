@@ -1,4 +1,4 @@
-<beans default-init-method="init" default-destroy-method="destroy">
+<beans default-init-method="iniciar" default-destroy-method="destruir">
 
 	<component-scan base-package="cr.ac.ucr.ecci.ci1312.ubung.core"/> <!--Este tag se usa para decir que el proyecto va a utilizar annotations-->
 	

@@ -11,6 +11,7 @@ import bean.AutowireMode;
 import bean.Bean;
 import bean.Parameter;
 import bean.Scope;
+import context.XmlApplicationContext;
 import javafx.util.Pair;
 import nu.xom.*;
 
@@ -194,7 +195,7 @@ public class XmlParser implements Parser {
     public static void main(final String[] args)
     {
         try {
-            XmlParser xmlParser = new XmlParser("beans.xml");
+            /*XmlParser xmlParser = new XmlParser("beans.xml");
             System.out.println(xmlParser.getDefaultInitMethod());
             System.out.println(xmlParser.getDefaultDestroyMethod());
             Map<String,Bean> container = xmlParser.getBeans();
@@ -206,7 +207,8 @@ public class XmlParser implements Parser {
                 System.out.println(bean.getConstructorArguments().size());
                 System.out.println(bean.getProperties().size());
                 System.out.println(bean.getBeanDependencies().size());
-            }
+            }*/
+            XmlApplicationContext xmlApplicationContext = new XmlApplicationContext("beans2.xml");
         }catch(Exception e){
             e.printStackTrace();
         }

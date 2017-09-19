@@ -2,7 +2,7 @@ package bean;
 
 public class  Parameter
 {
-    private int index;
+    private Integer index;
     private String beanRef;
     private String name;
     private Object instance;
