@@ -134,11 +134,6 @@ public class XmlParser implements Parser {
                     newParameter = this.getPropertiesInformation(argument);
                     properties.add(newParameter);
                     break;
-                case BEAN:
-                    //System.out.println("Bean anidado ");
-                    newNestedBean = this.createBean(argument);
-                    nestedBeans.add(newNestedBean);
-                    break;
                 case ERROR:
                     //System.out.println("Error!");
                     break;
@@ -149,7 +144,6 @@ public class XmlParser implements Parser {
         }
         newBean.setConstructorArguments(constructorArgs);
         newBean.setProperties(properties);
-        newBean.setBeanDependencies(nestedBeans);
     }
 
     private Parameter getConstructorInformation(Element info){

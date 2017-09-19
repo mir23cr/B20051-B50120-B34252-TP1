@@ -16,14 +16,11 @@ public class Bean
     private Scope scopeType;
     private List<Parameter> constructorArguments;
     private List<Parameter> properties;
-    private List<Bean> beanDependencies;
+
 
     public Bean() {
         this.autowireMode = AutowireMode.NO;
         this.scopeType = Scope.SINGLETON;
-        this.constructorArguments = new LinkedList<Parameter>();
-        this.properties = new LinkedList<Parameter>();
-        this.beanDependencies = new LinkedList<Bean>();
     }
 
     public String getId() {
@@ -106,11 +103,4 @@ public class Bean
         this.properties = properties;
     }
 
-    public List<Bean> getBeanDependencies() {
-        return beanDependencies;
-    }
-
-    public void setBeanDependencies(List<Bean> beanDependencies) {
-        this.beanDependencies = beanDependencies;
-    }
 }

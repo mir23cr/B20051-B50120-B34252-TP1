@@ -204,7 +204,6 @@ public  class XmlApplicationContext extends ApplicationContext {
             System.out.println("Modo de autowire: " + bean.getAutowireMode());
             System.out.println("Argumentos del constructor: " + bean.getConstructorArguments().size());
             System.out.println("Argumentos de las propiedades: " + bean.getProperties().size());
-            System.out.println("Tamaño de las dependencias de beans: " + bean.getBeanDependencies().size());
             System.out.println("Método de init: " + bean.getInit());
             System.out.println("Método de destroy: " + bean.getDestroy());
             System.out.println();
