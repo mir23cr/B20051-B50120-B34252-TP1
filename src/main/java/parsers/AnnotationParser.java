@@ -35,8 +35,14 @@ public class AnnotationParser implements Parser {
                 scanPackage(file);
             else{
                 String className = file.getName().replace(".class","");
-                String currentPath = currentPackage.getPath().substring(basePackagePath.length()+1);
-                String classPath = currentPath.replace("\\",".") + "." + className;
+                String classPath;
+                if(currentPackage.getAbsolutePath()!=basePackagePath) {
+                    String currentPath = currentPackage.getPath().substring(basePackagePath.length() + 1);
+                    classPath = currentPath.replace("\\",".") + "." + className;
+                }
+                else
+                    classPath = className;
+
                 scanClass(classPath);
 
             }
@@ -47,12 +53,13 @@ public class AnnotationParser implements Parser {
     private void scanClass(String classPath) {
         try {
             Class currentClass = Class.forName(classPath);
+            System.out.println(currentClass.getCanonicalName());
             Annotation[] annotations = currentClass.getAnnotations();
             for (Annotation annotation:annotations) {
-                System.out.println(annotation.annotationType());
+                System.out.println("\t"+annotation.annotationType());
             }
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("Class not found: "+ classPath);
         }
     }
 
