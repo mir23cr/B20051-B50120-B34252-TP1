@@ -201,7 +201,7 @@ public class XmlParser implements Parser {
             House home2 = xmlApplicationContext.getBean(House.class,"home");
             //home2.getDad().setName("Luisito");
             home2.getCat().setName("Berlioz");
-            Cat cat2 = (Cat) xmlApplicationContext.getBean("puchin");
+            Cat cat2 =  xmlApplicationContext.getBean(Cat.class,"puchin");
             cat2.setName("Berlioz");
             System.out.println("Dad's name: " + home.getDad().getName());
             System.out.println("Cat's name: " + cat2.getName());

@@ -1,47 +1,34 @@
 package context;
 
+import bean.Bean;
+import bean.Scope;
 import parsers.AnnotationParser;
+import parsers.XmlParser;
 
-/**
- * Created by Rodrigo on 9/9/2017.
- */
+import java.util.Map;
+
 public class AnnotationApplicationContext extends ApplicationContext {
     private AnnotationParser annotationParser;
 
-    public Object getBean(String beanId) {
-
-        return null;
+    public AnnotationApplicationContext(String fileName){
+        try {
+            this.annotationParser = new AnnotationParser(fileName);
+            this.defaultInit = this.annotationParser.getDefaultInitMethod();
+            this.defaultDestroy = this.annotationParser.getDefaultDestroyMethod();
+            this.registerBeans();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
-    public <T> T getBean(Class<T> classType, String beanId) {
-
-        return null;
-    }
-
-    public boolean containsBean(String beanId) {
-
-        return false;
-    }
-
-    public boolean isSingleton(String beanId) {
-
-        return false;
-    }
-
-    public boolean isPrototype(String beanId) {
-
-        return false;
-    }
-
+    /*Seteo instancias*/
     public void registerBeans() {
-
-    }
-
-    public void injectDependencies() {
-
-    }
-
-    public void close() {
-
+        try {
+            this.container = this.annotationParser.getBeans();
+            this.setBeanSettings();
+            this.injectDependencies();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

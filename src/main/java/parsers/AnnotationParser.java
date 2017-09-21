@@ -1,9 +1,14 @@
 package parsers;
 
+
+import bean.Bean;
+import nu.xom.ParsingException;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.net.URL;
+import java.util.Map;
 
 /**
  * @author Rodrigo Acuña
@@ -63,5 +68,15 @@ public class AnnotationParser implements Parser {
         }
     }
 
+    public String getDefaultInitMethod() throws IOException {
+        return null;
+    }
 
+    public String getDefaultDestroyMethod() throws IOException {
+        return null;
+    }
+
+    public Map<String, Bean> getBeans() throws ParsingException, IOException {
+        return null;
+    }
 }
