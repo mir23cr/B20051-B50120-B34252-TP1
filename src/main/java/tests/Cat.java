@@ -26,4 +26,12 @@ public class Cat {
     public void setAge(int age) {
         this.age = age;
     }
+
+    public void init(){
+        System.out.println("Initializing cat...");
+    }
+
+    public void  destroy(){
+        System.out.println("Destroying cat...");
+    }
 }

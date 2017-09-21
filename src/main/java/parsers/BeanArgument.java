@@ -3,7 +3,6 @@ package parsers;
 public enum BeanArgument {
     CONSTRUCTOR_ARG,
     PROPERTY,
-    BEAN,
     ERROR;
 
     public static BeanArgument getArgument(String argumentName){
@@ -13,8 +12,6 @@ public enum BeanArgument {
             argument = CONSTRUCTOR_ARG;
         }else if(argumentName.equals("property")){
             argument = PROPERTY;
-        }else if(argumentName.equals("bean")){
-            argument = BEAN;
         }
         return argument;
     }

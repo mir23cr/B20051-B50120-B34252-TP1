@@ -9,8 +9,9 @@ import bean.Bean;
 import bean.Parameter;
 import bean.Scope;
 import context.XmlApplicationContext;
-import javafx.util.Pair;
 import nu.xom.*;
+import tests.Cat;
+import tests.House;
 
 /**
  * @author Rodrigo Acuña
@@ -190,20 +191,21 @@ public class XmlParser implements Parser {
     public static void main(final String[] args)
     {
         try {
-            /*XmlParser xmlParser = new XmlParser("beans.xml");
-            System.out.println(xmlParser.getDefaultInitMethod());
-            System.out.println(xmlParser.getDefaultDestroyMethod());
-            Map<String,Bean> container = xmlParser.getBeans();
-            Bean bean;
-            for (Map.Entry<String,Bean> element : container.entrySet()){
-                System.out.println(element.getKey());
-                bean = element.getValue();
-                System.out.println(bean.getAutowireMode());
-                System.out.println(bean.getConstructorArguments().size());
-                System.out.println(bean.getProperties().size());
-                System.out.println(bean.getBeanDependencies().size());
-            }*/
             XmlApplicationContext xmlApplicationContext = new XmlApplicationContext("beans2.xml");
+            House home = (House) xmlApplicationContext.getBean("home");
+
+            Cat cat = (Cat) xmlApplicationContext.getBean("puchin");
+            System.out.println("Dad's name: " + home.getDad().getName());
+            System.out.println("Cat's name: " + cat.getName());
+            //House home2 = (House) xmlApplicationContext.getBean("home");
+            House home2 = xmlApplicationContext.getBean(House.class,"home");
+            //home2.getDad().setName("Luisito");
+            home2.getCat().setName("Berlioz");
+            Cat cat2 = (Cat) xmlApplicationContext.getBean("puchin");
+            cat2.setName("Berlioz");
+            System.out.println("Dad's name: " + home.getDad().getName());
+            System.out.println("Cat's name: " + cat2.getName());
+
         }catch(Exception e){
             e.printStackTrace();
         }

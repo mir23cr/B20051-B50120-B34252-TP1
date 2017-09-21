@@ -16,6 +16,14 @@ public class House {
     public House(Dog dog, Cat cat){
         this.doggie = dog;
         this.cat = cat;
+        this.dad = new Person();
+        dad.setName("Bartosz");
+    }
+
+    public House(Dog dog, Cat cat, Person dad){
+        this.doggie = dog;
+        this.cat = cat;
+        this.dad = dad;
     }
 
     public Person getDad() {
@@ -40,5 +48,15 @@ public class House {
 
     public void setCat(Cat cat) {
         this.cat = cat;
+    }
+
+    public void run(){
+        System.out.println("Armando el chante.");
+        this.cat = new Cat();
+        cat.setName("Rarito");
+    }
+
+    public void close(){
+        this.cat = null;
     }
 }

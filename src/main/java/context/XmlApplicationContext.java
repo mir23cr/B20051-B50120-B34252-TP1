@@ -47,10 +47,18 @@ public  class XmlApplicationContext extends ApplicationContext {
                         if(result == null){
                             result = this.getNewBeanInstance(requestedBean);
                             requestedBean.setInstance(result);
+                            /*Call the postConstructMethod*/
+                            if(requestedBean.getInit() != null){
+                                this.callInitMethodSingleton(requestedBean);
+                            }
+                            this.injectSetters(requestedBean.getProperties(),result);
                         }
                     break;
                 case PROTOTYPE:
                         result = this.getNewBeanInstance(requestedBean);
+                        if(requestedBean.getInit() != null) {
+                            this.callInitMethodPrototype(requestedBean, result);
+                        }
                         this.injectSetters(requestedBean.getProperties(),result);
                     break;
             }
@@ -73,6 +81,7 @@ public  class XmlApplicationContext extends ApplicationContext {
             if(beanConstructorArgsCount == 0){
                 newInstance = classToInstance.newInstance();
             }else{
+
                 constructorArgs = new Class[beanConstructorArgsCount];
                 constructorParameters = new Object[beanConstructorArgsCount];
                 for (int i = 0; i < beanConstructorArgsCount; i++) {
@@ -92,7 +101,7 @@ public  class XmlApplicationContext extends ApplicationContext {
 
 
     public <T> T getBean(Class<T> classType, String beanId) {
-        return null;
+        return classType.cast(this.getBean(beanId));
     }
 
     public boolean containsBean(String beanId) {
@@ -110,8 +119,6 @@ public  class XmlApplicationContext extends ApplicationContext {
     /*Seteo instancias*/
     public void registerBeans() {
         try {
-            Class classToInstance;
-            Object objectToInstance;
             this.container = this.xmlParser.getBeans();
             Bean bean;
             for (Map.Entry<String,Bean> element : container.entrySet()){
@@ -126,24 +133,12 @@ public  class XmlApplicationContext extends ApplicationContext {
                 if(bean.getScopeType() == Scope.SINGLETON){
                     bean.setInstance(this.getNewBeanInstance(bean));
                     /*Call the postConstructMethod*/
-                    if( bean.getInstance() instanceof House){
-                        System.out.println("Agarramos a pilita!!");
-                        System.out.println(((House)bean.getInstance()).getCat().getName() + " " + ((House)bean.getInstance()).getCat().getAge());
-                        System.out.println(((House)bean.getInstance()).getDoggie().getName());
-                        System.out.println(((House)bean.getInstance()).getDad());
+                    if(bean.getInit() != null){
+                        this.callInitMethodSingleton(bean);
                     }
                 }
             }
             this.injectDependencies();
-
-            Bean b = this.container.get("home");
-            System.out.println("Agarramos a pilita!!");
-            System.out.println(((House)b.getInstance()).getCat().getName() + " " + ((House)b.getInstance()).getCat().getAge());
-            System.out.println(((House)b.getInstance()).getDoggie().getName());
-            System.out.println(((House)b.getInstance()).getDad().getName());
-
-            //this.printContainer();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -191,8 +186,39 @@ public  class XmlApplicationContext extends ApplicationContext {
         }
     }
 
-    public void close() {
+    public void callInitMethodSingleton(Bean bean){
+        try {
+            Method initMethod = bean.getInstance().getClass().getMethod(bean.getInit());
+            initMethod.invoke(bean.getInstance());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void callInitMethodPrototype(Bean bean, Object object){
+        try {
+            Method initMethod = Class.forName(bean.getClassType()).getMethod(bean.getInit());
+            initMethod.invoke(object);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void close() {
+        try {
+            Method destroyMethod;
+            for (Map.Entry<String,Bean> element : container.entrySet()){
+                if(element.getValue().getScopeType() == Scope.SINGLETON){
+                    if(element.getValue().getDestroy()!= null){
+                        destroyMethod = Class.forName(element.getValue().getClassType()).getMethod(element.getValue().getDestroy());
+                        destroyMethod.invoke(element.getValue().getInstance());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void printContainer(){

@@ -19,4 +19,12 @@ public class Dog {
     public void setName(String name) {
         this.name = name;
     }
+
+    public void init(){
+        System.out.println("Initializing dog...");
+    }
+
+    public void  destroy(){
+        System.out.println("Destroying dog...");
+    }
 }

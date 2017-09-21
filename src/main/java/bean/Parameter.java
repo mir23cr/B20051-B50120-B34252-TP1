@@ -7,8 +7,11 @@ public class  Parameter {
     private String beanRef;
     private String name;
     private Object instance;
+    private AutowireMode autowireMode;
+
 
     public Parameter() {
+        this.autowireMode = AutowireMode.NO;
     }
 
     public String getName() {
@@ -43,5 +46,11 @@ public class  Parameter {
         this.instance = instance;
     }
 
+    public AutowireMode getAutowireMode() {
+        return autowireMode;
+    }
 
+    public void setAutowireMode(AutowireMode autowireMode) {
+        this.autowireMode = autowireMode;
+    }
 }

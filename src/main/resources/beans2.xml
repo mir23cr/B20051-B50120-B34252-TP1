@@ -1,9 +1,10 @@
-<beans default-init-method="iniciar" default-destroy-method="destruir">
+<beans default-init-method="init" default-destroy-method="destroy">
 
 	<bean id="home" class="tests.House" init-method="run" destroy-method="close">
 		<constructor-arg index = "1" ref="puchin" />
 		<constructor-arg index = "0" ref="pili" />
-		<property name = "dad" ref = "daddy"/>
+		<!--<constructor-arg index = "2" ref="daddy" />-->
+		
 	</bean>
 
 	<bean id="daddy" class="tests.Person">
@@ -12,7 +13,7 @@
 	<bean id="pili" class="tests.Dog">
 	</bean>
 	
-	<bean id="puchin" class="tests.Cat">
+	<bean id="puchin" class="tests.Cat" scope="prototype">
 	</bean>
 
 
