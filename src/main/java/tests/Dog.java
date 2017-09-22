@@ -8,8 +8,10 @@ package tests;
  */
 public class Dog {
     private String name = "Pili";
+    private House choza;
 
-    public Dog() {
+    public Dog(House choza) {
+        this.choza = choza;
     }
 
     public String getName() {

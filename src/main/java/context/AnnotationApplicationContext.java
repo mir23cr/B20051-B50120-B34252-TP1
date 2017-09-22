@@ -8,8 +8,6 @@ public class AnnotationApplicationContext extends ApplicationContext {
     public AnnotationApplicationContext(String fileName){
         try {
             this.annotationParser = new AnnotationParser(fileName);
-            //this.defaultInit = this.annotationParser.getInitMethod();
-            //this.defaultDestroy = this.annotationParser.getDestroyMethod();
             this.registerBeans();
         }catch (Exception e){
             e.printStackTrace();
