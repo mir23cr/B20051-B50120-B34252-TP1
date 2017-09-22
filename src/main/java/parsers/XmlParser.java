@@ -4,6 +4,7 @@ package parsers;
 import java.io.IOException;
 import java.util.*;
 
+import annotations.Component;
 import bean.AutowireMode;
 import bean.Bean;
 import bean.Parameter;

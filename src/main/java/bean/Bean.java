@@ -2,8 +2,10 @@ package bean;
 
 import java.util.LinkedList;
 import java.util.List;
-import javafx.util.Pair;
 
+import annotations.Component;
+import javafx.util.Pair;
+@Component
 public class Bean
 {
     private String id;
