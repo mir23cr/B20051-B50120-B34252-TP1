@@ -174,22 +174,21 @@ public abstract class ApplicationContext implements ApplicationContextInterface
     }
 
     public boolean containsBean(String beanId) {
-
         return container.containsKey(beanId);
     }
 
     public boolean isSingleton(String beanId) {
-
+        boolean result = false;
         if (container.get(beanId).getScopeType() == ScopeEnum.SINGLETON)
-            return true;
-        return false;
+            result = true;
+        return result;
     }
 
     public boolean isPrototype(String beanId) {
-
+        boolean result = false;
         if (container.get(beanId).getScopeType() == ScopeEnum.PROTOTYPE)
-            return true;
-        return false;
+            result =  true;
+        return result;
     }
 
     protected void setBeanSettings() throws Exception {
@@ -202,10 +201,10 @@ public abstract class ApplicationContext implements ApplicationContextInterface
             if(bean.getDestroy()==null){
                 bean.setDestroy(this.defaultDestroy);
             }
-                /*Constructor analysis*/
+            /*Constructor analysis*/
             if(bean.getScopeType() == ScopeEnum.SINGLETON){
                 bean.setInstance(this.getNewBeanInstance(bean));
-                    /*Call the postConstructMethod*/
+                /*Call the postConstructMethod*/
                 if(bean.getInit() != null){
                     this.callInitMethodSingleton(bean);
                 }

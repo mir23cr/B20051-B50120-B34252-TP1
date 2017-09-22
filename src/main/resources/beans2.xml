@@ -11,6 +11,7 @@
 	</bean>
 
 	<bean id="pili" class="tests.Dog">
+		<constructor-arg ref="home" />
 	</bean>
 	
 	<bean id="puchin" class="tests.Cat" scope="prototype">
