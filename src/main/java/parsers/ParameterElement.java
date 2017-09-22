@@ -7,5 +7,6 @@ package parsers;
 public enum ParameterElement {
     NAME,
     REF,
-    INDEX;
+    INDEX,
+    CLASS;
 }

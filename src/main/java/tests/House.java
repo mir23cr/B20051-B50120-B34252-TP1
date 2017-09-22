@@ -52,8 +52,8 @@ public class House {
 
     public void run(){
         System.out.println("Armando el chante.");
-        this.cat = new Cat("hola");
-        cat.setName("Rarito");
+        //this.cat = new Cat("hola");
+        //cat.setName("Rarito");
     }
 
     public void close(){

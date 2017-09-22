@@ -8,12 +8,14 @@ import annotations.Qualifier;
  * @author Vladimir Aguilar
  * Creation Date: 18/9/2017
  */
-@Component
+@Component("cat1")
 public class Cat {
     private String name = "Puchina";
     private int age = 17;
-    @Autowired
-    public Cat(String perro) {
+
+
+    public Cat() {
+
     }
 
     public String getName() {

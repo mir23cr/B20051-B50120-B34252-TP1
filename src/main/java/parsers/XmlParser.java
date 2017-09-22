@@ -95,9 +95,6 @@ public class XmlParser implements Parser {
                         //System.out.print("Se vio un scope ");
                         newBean.setScopeType(ScopeEnum.valueOf(propertyValue.toUpperCase()));
                         break;
-                    case AUTOWIRING:
-                        newBean.setAutowireMode(AutowireMode.valueOf(propertyValue.toUpperCase()));
-                        break;
                     default:
                         //System.out.println("Error");
                         break;
@@ -116,7 +113,6 @@ public class XmlParser implements Parser {
 
     public void getBeanArgs(Elements beanArgs, Bean newBean){
         Element argument;
-        Bean newNestedBean;
         Parameter newParameter;
         List<Parameter> constructorArgs = new ArrayList<Parameter>();
 
@@ -157,12 +153,17 @@ public class XmlParser implements Parser {
             switch (parameterElement){
                 case REF:
                     parameter.setBeanRef(constructorElementValue);
+                    parameter.setAutowireMode(AutowireMode.BYNAME);
                     break;
                 case NAME:
                     parameter.setName(constructorElementValue);
                     break;
                 case INDEX:
                     parameter.setIndex(Integer.parseInt(constructorElementValue));
+                    break;
+                case CLASS:
+                    parameter.setClassTypeName(constructorElementValue);
+                    parameter.setAutowireMode(AutowireMode.BYTYPE);
                     break;
             }
         }
@@ -179,9 +180,14 @@ public class XmlParser implements Parser {
             switch (parameterElement){
                 case REF:
                     parameter.setBeanRef(propertyElementValue);
+                    parameter.setAutowireMode(AutowireMode.BYNAME);
                     break;
                 case NAME:
                     parameter.setName(propertyElementValue);
+                    break;
+                case CLASS:
+                    parameter.setClassTypeName(propertyElementValue.toUpperCase());
+                    parameter.setAutowireMode(AutowireMode.BYTYPE);
                     break;
             }
         }
@@ -191,7 +197,7 @@ public class XmlParser implements Parser {
     public static void main(final String[] args)
     {
         try {
-            XmlApplicationContext xmlApplicationContext = new XmlApplicationContext("beans2.xml");
+            /*XmlApplicationContext xmlApplicationContext = new XmlApplicationContext("beans2.xml");
             House home = (House) xmlApplicationContext.getBean("home");
 
             Cat cat = (Cat) xmlApplicationContext.getBean("puchin");
@@ -204,8 +210,7 @@ public class XmlParser implements Parser {
             Cat cat2 =  xmlApplicationContext.getBean(Cat.class,"puchin");
             cat2.setName("Berlioz");
             System.out.println("Dad's name: " + home.getDad().getName());
-            System.out.println("Cat's name: " + cat2.getName());
-
+            System.out.println("Cat's name: " + cat2.getName());*/
         }catch(Exception e){
             e.printStackTrace();
         }

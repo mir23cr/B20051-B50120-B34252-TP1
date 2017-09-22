@@ -4,7 +4,8 @@
 		<constructor-arg index = "1" ref="puchin" />
 		<constructor-arg index = "0" ref="pili" />
 		<!--<constructor-arg index = "2" ref="daddy" />-->
-		
+		<property name="hola" class="tests.Dog"/>
+		<property name="hola" ref="daddy"/>
 	</bean>
 
 	<bean id="daddy" class="tests.Person">

@@ -167,6 +167,7 @@ public class AnnotationParser implements Parser {
                     constructorArgument.setAutowireMode(AutowireMode.BYNAME);
                     constructorArgument.setBeanRef(qualifier.value());
                 }
+
                 arguments.add(constructorArgument);
             }
         }

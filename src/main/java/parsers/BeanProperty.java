@@ -9,7 +9,6 @@ public enum BeanProperty {
     SCOPE,
     INIT,
     DESTROY,
-    AUTOWIRING,
     ERROR;
 
     public static BeanProperty getProperty(String propertyName){
@@ -25,8 +24,6 @@ public enum BeanProperty {
             property = DESTROY;
         }else if(propertyName.equals("scope")){
             property = SCOPE;
-        }else if(propertyName.equals("autowiring")){
-            property = AUTOWIRING;
         }
         return property;
     }
