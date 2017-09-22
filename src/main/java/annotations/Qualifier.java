@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
  * Created by Rodrigo on 9/9/2017.
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.CONSTRUCTOR,ElementType.METHOD})
+@Target(ElementType.PARAMETER)
 public @interface Qualifier {
     @NotNull String value();
 }

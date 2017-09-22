@@ -2,12 +2,13 @@ package bean;
 
 import java.util.Comparator;
 
-public class  Parameter {
+public class Parameter {
     private Integer index;
-    private String beanRef;
     private String name;
-    private Object instance;
+    private String classTypeName;
+    private String beanRef;
     private AutowireMode autowireMode;
+    private Object instance;
 
 
     public Parameter() {
@@ -52,5 +53,13 @@ public class  Parameter {
 
     public void setAutowireMode(AutowireMode autowireMode) {
         this.autowireMode = autowireMode;
+    }
+
+    public String getClassTypeName() {
+        return classTypeName;
+    }
+
+    public void setClassTypeName(String classTypeName) {
+        this.classTypeName = classTypeName;
     }
 }

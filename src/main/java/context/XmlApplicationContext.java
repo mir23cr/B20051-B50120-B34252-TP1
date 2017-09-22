@@ -1,9 +1,6 @@
 package context;
 
-import bean.Bean;
-import bean.Scope;
 import parsers.XmlParser;
-import java.util.Map;
 
 
 public  class XmlApplicationContext extends ApplicationContext {

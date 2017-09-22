@@ -4,11 +4,10 @@ package parsers;
 import java.io.IOException;
 import java.util.*;
 
-import annotations.Component;
 import bean.AutowireMode;
 import bean.Bean;
 import bean.Parameter;
-import bean.Scope;
+import bean.ScopeEnum;
 import context.XmlApplicationContext;
 import nu.xom.*;
 import tests.Cat;
@@ -94,7 +93,7 @@ public class XmlParser implements Parser {
                         break;
                     case SCOPE:
                         //System.out.print("Se vio un scope ");
-                        newBean.setScopeType(Scope.valueOf(propertyValue.toUpperCase()));
+                        newBean.setScopeType(ScopeEnum.valueOf(propertyValue.toUpperCase()));
                         break;
                     case AUTOWIRING:
                         newBean.setAutowireMode(AutowireMode.valueOf(propertyValue.toUpperCase()));

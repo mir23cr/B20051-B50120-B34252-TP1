@@ -1,14 +1,19 @@
 package tests;
 
+import annotations.Autowired;
+import annotations.Component;
+import annotations.Qualifier;
+
 /**
  * @author Vladimir Aguilar
  * Creation Date: 18/9/2017
  */
+@Component
 public class Cat {
     private String name = "Puchina";
     private int age = 17;
-
-    public Cat() {
+    @Autowired
+    public Cat(String perro) {
     }
 
     public String getName() {

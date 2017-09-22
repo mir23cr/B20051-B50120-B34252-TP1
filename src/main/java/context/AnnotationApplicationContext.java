@@ -1,11 +1,6 @@
 package context;
 
-import bean.Bean;
-import bean.Scope;
 import parsers.AnnotationParser;
-import parsers.XmlParser;
-
-import java.util.Map;
 
 public class AnnotationApplicationContext extends ApplicationContext {
     private AnnotationParser annotationParser;
@@ -13,8 +8,8 @@ public class AnnotationApplicationContext extends ApplicationContext {
     public AnnotationApplicationContext(String fileName){
         try {
             this.annotationParser = new AnnotationParser(fileName);
-            this.defaultInit = this.annotationParser.getDefaultInitMethod();
-            this.defaultDestroy = this.annotationParser.getDefaultDestroyMethod();
+            //this.defaultInit = this.annotationParser.getInitMethod();
+            //this.defaultDestroy = this.annotationParser.getDestroyMethod();
             this.registerBeans();
         }catch (Exception e){
             e.printStackTrace();

@@ -1,16 +1,20 @@
 package parsers;
 
-import annotations.Component;
-import annotations.ScopeAnnotation;
+import annotations.*;
+import bean.AutowireMode;
 import bean.Bean;
 
 import java.io.File;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
-import bean.Scope;
+import bean.Parameter;
+import bean.ScopeEnum;
 
 /**
  * @author Rodrigo Acuña
@@ -63,30 +67,35 @@ public class AnnotationParser implements Parser {
         try {
             Class currentClass = Class.forName(classPath);
             System.out.println(currentClass.getSimpleName());
-            Component componentAnnotation = (Component) currentClass.getAnnotation(Component.class);
+
             //Revisar si es un componente
-            if (componentAnnotation != null) {
+            if (currentClass.getAnnotation(Component.class) != null) {
+                //Se crea el bean.
                 bean = new Bean();
                 //Asignar bean id
-                String id = getBeanId(componentAnnotation.value(), currentClass.getSimpleName());
+                String id = getBeanId(currentClass);
                 bean.setId(id);
                 //Asignar scope
-                ScopeAnnotation scopeAnnotation = (ScopeAnnotation) currentClass.getAnnotation(ScopeAnnotation.class);
-                if (scopeAnnotation != null && scopeAnnotation.value().toLowerCase().compareTo("prototype") == 0)
-                    bean.setScopeType(Scope.PROTOTYPE);
-
+                ScopeEnum scope = getScope(currentClass);
+                bean.setScopeType(scope);
                 //Asignar Parametros de Constructor SOLO SE PUEDE UN CONSTRUCTOR
-                Constructor constructor = currentClass.getConstructors()[0];
-
-
-                System.out.println("\t" + id);
-                System.out.println("\t" + "tiene anotaciones");
-                Annotation[] annotations = currentClass.getAnnotations();
-                for (Annotation annotation : annotations) {
-                    System.out.println("\t" + annotation);
-                    //System.out.println("\t"+annotation.annotationType().getSimpleName());
+                List<Parameter> constructorArguments = getConstructorArguments(currentClass);
+                bean.setConstructorArguments(constructorArguments);
+                //Asignar propiedades de setters
+                //Asignar init Method
+                //Asignar destroy Method
+                Method[] methods = currentClass.getMethods();
+                List<Parameter> beanProperties = new LinkedList<>();
+                for (Method method : methods) {
+                    if (method.getAnnotation(Autowired.class) != null) {
+                        beanProperties.add(getParameter(method));
+                    } else if (method.getAnnotation(PostConstruct.class) != null) {
+                        bean.setInit(method.getName());
+                    } else if (method.getAnnotation(PreDestroy.class) != null) {
+                        bean.setDestroy(method.getName());
+                    }
                 }
-
+                bean.setProperties(beanProperties);
             }
 
         } catch (ClassNotFoundException e) {
@@ -95,7 +104,30 @@ public class AnnotationParser implements Parser {
         return bean;
     }
 
-    private String getBeanId(String annotationValue, String className) {
+    private Parameter getParameter(Method method) {
+        java.lang.reflect.Parameter[] methodParameters = method.getParameters();
+        Parameter parameter = new Parameter();
+        if(methodParameters.length == 1){
+            java.lang.reflect.Parameter methodParameter = methodParameters[0];
+            parameter.setIndex(0);
+            parameter.setName(methodParameter.getName());
+            parameter.setClassTypeName(methodParameter.getType().getCanonicalName());
+            Qualifier qualifier = methodParameter.getAnnotation(Qualifier.class);
+            if (qualifier != null) {
+                parameter.setAutowireMode(AutowireMode.BYNAME);
+                parameter.setBeanRef(qualifier.value());
+            }
+        }
+        else{
+            System.out.println("Setter has incorrect number of parameters");
+        }
+        return parameter;
+    }
+
+    private String getBeanId(Class currentClass) {
+        Component componentAnnotation = (Component) currentClass.getAnnotation(Component.class);
+        String annotationValue = componentAnnotation.value();
+        String className = currentClass.getSimpleName();
         String result;
         if (annotationValue.compareTo("null") != 0)
             result = annotationValue;
@@ -109,18 +141,43 @@ public class AnnotationParser implements Parser {
         }
         return result;
     }
-    public String getDefaultInitMethod()  {
-        return null;
+
+    private ScopeEnum getScope(Class currentClass) {
+        ScopeEnum scopeEnum = ScopeEnum.SINGLETON;
+        Scope scope = (Scope) currentClass.getAnnotation(Scope.class);
+        if (scope != null && scope.value().toLowerCase().compareTo("prototype") == 0)
+            scopeEnum = scopeEnum.PROTOTYPE;
+        return scopeEnum;
     }
 
-    public String getDefaultDestroyMethod()  {
-        return null;
+    public List<Parameter> getConstructorArguments(Class currentClass) {
+        List<Parameter> arguments = new LinkedList<>();
+        Constructor constructor = currentClass.getConstructors()[0];
+        Autowired autowired = (Autowired) constructor.getAnnotation(Autowired.class);
+        if (autowired != null) {
+            java.lang.reflect.Parameter[] constructorParameters = constructor.getParameters();
+            for (int i = 0; i < constructorParameters.length; i++) {
+                java.lang.reflect.Parameter currentParameter = constructorParameters[i];
+                Parameter constructorArgument = new Parameter();
+                constructorArgument.setIndex(i);
+                constructorArgument.setName(currentParameter.getName());
+                constructorArgument.setClassTypeName(currentParameter.getType().getCanonicalName());
+                Qualifier qualifier = currentParameter.getAnnotation(Qualifier.class);
+                if (qualifier != null) {
+                    constructorArgument.setAutowireMode(AutowireMode.BYNAME);
+                    constructorArgument.setBeanRef(qualifier.value());
+                }
+                arguments.add(constructorArgument);
+            }
+        }
+
+        return arguments;
     }
+
 
     public Map<String, Bean> getBeans() {
         return null;
     }
-
 
 
 }

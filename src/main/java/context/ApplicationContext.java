@@ -1,7 +1,7 @@
 package context;
 import bean.Bean;
 import bean.Parameter;
-import bean.Scope;
+import bean.ScopeEnum;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -113,7 +113,7 @@ public abstract class ApplicationContext implements ApplicationContextInterface
     protected void injectDependencies() {
         try {
             for (Map.Entry<String,Bean> element : container.entrySet()){
-                if(element.getValue().getScopeType() == Scope.SINGLETON){
+                if(element.getValue().getScopeType() == ScopeEnum.SINGLETON){
                     this.injectSetters(element.getValue().getProperties(),element.getValue().getInstance());
                 }
             }
@@ -145,7 +145,7 @@ public abstract class ApplicationContext implements ApplicationContextInterface
         try {
             Method destroyMethod;
             for (Map.Entry<String,Bean> element : container.entrySet()){
-                if(element.getValue().getScopeType() == Scope.SINGLETON){
+                if(element.getValue().getScopeType() == ScopeEnum.SINGLETON){
                     if(element.getValue().getDestroy()!= null){
                         destroyMethod = Class.forName(element.getValue().getClassType()).getMethod(element.getValue().getDestroy());
                         destroyMethod.invoke(element.getValue().getInstance());
@@ -180,14 +180,14 @@ public abstract class ApplicationContext implements ApplicationContextInterface
 
     public boolean isSingleton(String beanId) {
 
-        if (container.get(beanId).getScopeType() == Scope.SINGLETON)
+        if (container.get(beanId).getScopeType() == ScopeEnum.SINGLETON)
             return true;
         return false;
     }
 
     public boolean isPrototype(String beanId) {
 
-        if (container.get(beanId).getScopeType() == Scope.PROTOTYPE)
+        if (container.get(beanId).getScopeType() == ScopeEnum.PROTOTYPE)
             return true;
         return false;
     }
@@ -203,7 +203,7 @@ public abstract class ApplicationContext implements ApplicationContextInterface
                 bean.setDestroy(this.defaultDestroy);
             }
                 /*Constructor analysis*/
-            if(bean.getScopeType() == Scope.SINGLETON){
+            if(bean.getScopeType() == ScopeEnum.SINGLETON){
                 bean.setInstance(this.getNewBeanInstance(bean));
                     /*Call the postConstructMethod*/
                 if(bean.getInit() != null){

@@ -1,10 +1,10 @@
 package bean;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import annotations.Component;
-import javafx.util.Pair;
+import annotations.Scope;
+
 @Component
 public class Bean
 {
@@ -15,14 +15,14 @@ public class Bean
     private String init;
     private String destroy;
     private AutowireMode autowireMode;
-    private Scope scopeType;
+    private ScopeEnum scopeType;
     private List<Parameter> constructorArguments;
     private List<Parameter> properties;
 
 
     public Bean() {
         this.autowireMode = AutowireMode.NO;
-        this.scopeType = Scope.SINGLETON;
+        this.scopeType = ScopeEnum.SINGLETON;
     }
 
     public String getId() {
@@ -81,11 +81,11 @@ public class Bean
         this.autowireMode = autowireMode;
     }
 
-    public Scope getScopeType() {
+    public ScopeEnum getScopeType() {
         return this.scopeType;
     }
 
-    public void setScopeType(Scope scopeType) {
+    public void setScopeType(ScopeEnum scopeType) {
         this.scopeType = scopeType;
     }
 

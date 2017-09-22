@@ -1,5 +1,5 @@
 package bean;
 
-public enum Scope {
+public enum ScopeEnum {
     SINGLETON, PROTOTYPE
 }
