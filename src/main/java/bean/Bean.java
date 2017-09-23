@@ -5,7 +5,7 @@ import java.util.List;
 import annotations.Component;
 import annotations.Scope;
 
-@Component
+//@Component
 public class Bean
 {
     private String id;
@@ -14,14 +14,12 @@ public class Bean
     private List<Class<?>> implementedInterfaces;
     private String init;
     private String destroy;
-    private AutowireMode autowireMode;
     private ScopeEnum scopeType;
     private List<Parameter> constructorArguments;
     private List<Parameter> properties;
 
 
     public Bean() {
-        this.autowireMode = AutowireMode.NO;
         this.scopeType = ScopeEnum.SINGLETON;
     }
 
@@ -71,14 +69,6 @@ public class Bean
 
     public void setDestroy(String destroy) {
         this.destroy = destroy;
-    }
-
-    public AutowireMode getAutowireMode() {
-        return this.autowireMode;
-    }
-
-    public void setAutowireMode(AutowireMode autowireMode) {
-        this.autowireMode = autowireMode;
     }
 
     public ScopeEnum getScopeType() {

@@ -1,5 +1,7 @@
 <beans default-init-method="init" default-destroy-method="destroy">
 
+	<component-scan base-package="tests"/>
+
 	<bean id="home" class="tests.House" init-method="run" destroy-method="close">
 		<constructor-arg index = "1" ref="puchin" />
 		<constructor-arg index = "0" ref="pili" />

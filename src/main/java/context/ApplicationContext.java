@@ -164,7 +164,6 @@ public abstract class ApplicationContext implements ApplicationContextInterface
             System.out.println("Bean id: " + element.getKey());
             bean = element.getValue();
             System.out.println("Tipo de clase: " + bean.getClassType());
-            System.out.println("Modo de autowire: " + bean.getAutowireMode());
             System.out.println("Argumentos del constructor: " + bean.getConstructorArguments().size());
             System.out.println("Argumentos de las propiedades: " + bean.getProperties().size());
             System.out.println("Método de init: " + bean.getInit());
@@ -222,7 +221,7 @@ public abstract class ApplicationContext implements ApplicationContextInterface
                 /*Constructor analysis*/
                 if(bean.getScopeType() == ScopeEnum.SINGLETON){
                     bean.setInstance(this.getNewBeanInstance(bean));
-                /*Call the postConstructMethod*/
+                    /*Call the postConstructMethod*/
                     if(bean.getInit() != null){
                         this.callInitMethodSingleton(bean);
                     }
@@ -273,6 +272,7 @@ public abstract class ApplicationContext implements ApplicationContextInterface
         if(visitedBeans.contains(bean.getId())){
             return true;
         }
+
         /*Add the Bean to the visited beans*/
         visitedBeans.add(bean.getId());
         for(Parameter p : this.container.get(bean.getId()).getConstructorArguments()){

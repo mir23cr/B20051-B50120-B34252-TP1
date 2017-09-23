@@ -8,6 +8,8 @@ import bean.AutowireMode;
 import bean.Bean;
 import bean.Parameter;
 import bean.ScopeEnum;
+import context.AnnotationApplicationContext;
+import context.ApplicationContext;
 import context.XmlApplicationContext;
 import nu.xom.*;
 import tests.Cat;
@@ -68,8 +70,17 @@ public class XmlParser implements Parser {
             Element root = document.getRootElement();
             Element annotations = root.getFirstChildElement(ParserStringConstants.BEANS_SCAN_ANNOTATIONS);
             if(annotations != null){
-            /*Hacer algo para parsear anotaciones*/
-                System.out.println("Hay que escanear paquete: " + annotations.getAttribute(ParserStringConstants.BEANS_SCAN_ANNOTATIONS_PACKAGE));
+                AnnotationParser annotationParser = new AnnotationParser(
+                        annotations.getAttribute(ParserStringConstants.BEANS_SCAN_ANNOTATIONS_PACKAGE).getValue());
+                this.beansDefinition = annotationParser.getBeans();
+                if(this.beansDefinition == null){
+                    this.beansDefinition = new HashMap<String, Bean>();
+                }else{
+                    for (Map.Entry<String,Bean> b: this.beansDefinition.entrySet()) {
+                        System.out.println("Holitas: " + b.getKey());
+
+                    }
+                }
             }
             Elements children = root.getChildElements(ParserStringConstants.BEAN_LABEL);
             Bean newBean;
@@ -234,7 +245,9 @@ public class XmlParser implements Parser {
     public static void main(final String[] args)
     {
         try {
-            XmlApplicationContext xmlApplicationContext = new XmlApplicationContext("beans2.xml");
+            ApplicationContext xmlApplicationContext = new XmlApplicationContext("beans2.xml");
+            /*
+
             House home = (House) xmlApplicationContext.getBean("home");
 
             Cat cat = (Cat) xmlApplicationContext.getBean("puchin");
@@ -248,8 +261,9 @@ public class XmlParser implements Parser {
             cat2.setName("Berlioz");
             System.out.println("Dad's name: " + home.getDad().getName());
             System.out.println("Cat's name: " + cat2.getName());
+            */
 
-            xmlApplicationContext.close();
+            //xmlApplicationContext.close();
         }catch(Exception e){
             e.printStackTrace();
         }
