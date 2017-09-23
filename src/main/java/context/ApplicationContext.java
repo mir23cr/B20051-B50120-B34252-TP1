@@ -1,12 +1,12 @@
 package context;
+import bean.AutowireMode;
 import bean.Bean;
 import bean.Parameter;
 import bean.ScopeEnum;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public abstract class ApplicationContext implements ApplicationContextInterface
 {
@@ -48,6 +48,7 @@ public abstract class ApplicationContext implements ApplicationContextInterface
         return classType.cast(this.getBean(beanId));
     }
 
+    @SuppressWarnings("unchecked")
     private Object getNewBeanInstance(Bean bean){
         try {
             Object newInstance;
@@ -141,7 +142,7 @@ public abstract class ApplicationContext implements ApplicationContextInterface
     }
 
 
-    void close() {
+    public void close() {
         try {
             Method destroyMethod;
             for (Map.Entry<String,Bean> element : container.entrySet()){
@@ -193,7 +194,7 @@ public abstract class ApplicationContext implements ApplicationContextInterface
 
     protected void setBeanSettings() throws Exception {
         Bean bean;
-        for (Map.Entry<String,Bean> element : container.entrySet()){
+        for (Map.Entry<String,Bean> element : this.container.entrySet()){
             bean = element.getValue();
             if(bean.getInit()==null){
                 bean.setInit(this.defaultInit);
@@ -201,14 +202,92 @@ public abstract class ApplicationContext implements ApplicationContextInterface
             if(bean.getDestroy()==null){
                 bean.setDestroy(this.defaultDestroy);
             }
-            /*Constructor analysis*/
-            if(bean.getScopeType() == ScopeEnum.SINGLETON){
-                bean.setInstance(this.getNewBeanInstance(bean));
-                /*Call the postConstructMethod*/
-                if(bean.getInit() != null){
-                    this.callInitMethodSingleton(bean);
+
+            for(Parameter p: bean.getConstructorArguments()){
+                if(p.getAutowireMode() == AutowireMode.BYTYPE){
+                    this.classToRef(p);
+                }
+            }
+
+            for(Parameter p: bean.getProperties()){
+                if(p.getAutowireMode() == AutowireMode.BYTYPE){
+                    this.classToRef(p);
                 }
             }
         }
+
+        if(!this.hasCycles()){
+            for (Map.Entry<String,Bean> element : this.container.entrySet()){
+                bean = element.getValue();
+                /*Constructor analysis*/
+                if(bean.getScopeType() == ScopeEnum.SINGLETON){
+                    bean.setInstance(this.getNewBeanInstance(bean));
+                /*Call the postConstructMethod*/
+                    if(bean.getInit() != null){
+                        this.callInitMethodSingleton(bean);
+                    }
+                }
+
+            }
+        }else {
+            System.out.println("There are cycles in the bean's construction, please solve this.");
+            System.exit(1);
+        }
+
+    }
+
+    private void classToRef(Parameter parameter){
+        try {
+            Iterator<Map.Entry<String,Bean>> iterator = this.container.entrySet().iterator();
+            boolean foundBean = false;
+            Bean beanIterator;
+            while (iterator.hasNext() && !foundBean){
+                beanIterator = iterator.next().getValue();
+                if(parameter.getClassTypeName().equals(Class.forName(beanIterator.getClassType()).getCanonicalName())){
+                    parameter.setBeanRef(beanIterator.getId());
+                    foundBean = true;
+                }
+            }
+            if(!foundBean){
+                System.out.println("There is no Bean in the container with the class type " + parameter.getClassTypeName());
+            }
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private boolean hasCycles(){
+        Set<String> visitedBeans = new HashSet<>();
+        for (Map.Entry<String,Bean> element : container.entrySet()){
+            if(this.hasCycles(element.getValue(),visitedBeans)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean hasCycles(Bean bean, Set<String> visitedBeans){
+        /*If the set contains the bean, then there is a cycle.*/
+        if(visitedBeans.contains(bean.getId())){
+            return true;
+        }
+        /*Add the Bean to the visited beans*/
+        visitedBeans.add(bean.getId());
+        for(Parameter p : this.container.get(bean.getId()).getConstructorArguments()){
+            if(this.hasCycles(this.container.get(p.getBeanRef()),visitedBeans)){
+                return true;
+            }
+        }
+
+        for(Parameter p : this.container.get(bean.getId()).getProperties()){
+            if(this.hasCycles(this.container.get(p.getBeanRef()),visitedBeans)){
+                return true;
+            }
+        }
+
+        visitedBeans.remove(bean.getId());
+        return false;
     }
 }

@@ -12,10 +12,13 @@ import annotations.Qualifier;
 public class Cat {
     private String name = "Puchina";
     private int age = 17;
+    private House home;
 
+    public Cat(){
+    }
 
-    public Cat() {
-
+    public Cat(House home) {
+        this.home = home;
     }
 
     public String getName() {
@@ -32,6 +35,14 @@ public class Cat {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public House getHome() {
+        return home;
+    }
+
+    public void setHome(House home) {
+        this.home = home;
     }
 
     public void init(){

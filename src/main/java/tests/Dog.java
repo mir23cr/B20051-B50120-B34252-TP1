@@ -2,16 +2,13 @@ package tests;
 
 /**
  * @author Vladimir Aguilar
- * @author Mariana Abellan
- * @author David González
  * Creation Date: 18/9/2017
  */
 public class Dog {
     private String name = "Pili";
-    private House choza;
 
-    public Dog(House choza) {
-        this.choza = choza;
+    public Dog() {
+
     }
 
     public String getName() {

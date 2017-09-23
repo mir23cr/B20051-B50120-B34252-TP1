@@ -18,9 +18,10 @@ import bean.ScopeEnum;
 
 /**
  * @author Rodrigo Acuña
- * @author Vladimir Aguilar
+ * @
+ * 0author Vladimir Aguilar
  * @author José Mesén
- *         Creation Date: 9/9/2017
+ * Creation Date: 9/9/2017
  */
 public class AnnotationParser implements Parser {
     String basePackagePath;
@@ -124,7 +125,7 @@ public class AnnotationParser implements Parser {
         ScopeEnum scopeEnum = ScopeEnum.SINGLETON;
         Scope scope = (Scope) currentClass.getAnnotation(Scope.class);
         if (scope != null && scope.value().toLowerCase().compareTo("prototype") == 0)
-            scopeEnum = scopeEnum.PROTOTYPE;
+            scopeEnum = ScopeEnum.PROTOTYPE;
         return scopeEnum;
     }
 
@@ -183,6 +184,7 @@ public class AnnotationParser implements Parser {
     }
 
 
+    @Override
     public Map<String, Bean> getBeans() {
         return beans;
     }

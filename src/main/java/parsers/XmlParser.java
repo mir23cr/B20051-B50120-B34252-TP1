@@ -14,10 +14,11 @@ import tests.Cat;
 import tests.House;
 
 /**
+ * Parser for the XML Files.
+ *
  * @author Rodrigo Acuña
  * @author Vladimir Aguilar
  * @author José Mesén
- * Creation Date: 9/9/2017
  */
 public class XmlParser implements Parser {
 
@@ -33,6 +34,10 @@ public class XmlParser implements Parser {
         this.beansDefinition = new HashMap<String, Bean>();
     }
 
+    /**
+     * Get the default init method name
+     * @return the name of the init method or null if it not exist
+     * */
     public String getDefaultInitMethod() throws ParsingException, IOException {
         Document document = parser.build(this.getClass().getClassLoader().getResourceAsStream(this.fileName));
         Element root = document.getRootElement();
@@ -40,6 +45,10 @@ public class XmlParser implements Parser {
         return (attribute!=null)? attribute.getValue():null;
     }
 
+    /**
+     * Get the default destroy method name
+     * @return the name of the init method or null if it not exist
+     * */
     public String getDefaultDestroyMethod() throws ParsingException, IOException {
         Document document = parser.build(this.getClass().getClassLoader().getResourceAsStream(this.fileName));
         Element root = document.getRootElement();
@@ -48,24 +57,39 @@ public class XmlParser implements Parser {
     }
 
 
-    public Map<String, Bean> getBeans() throws ParsingException, IOException {
-
-        Document document = parser.build(this.getClass().getClassLoader().getResourceAsStream(this.fileName));
-        Element root = document.getRootElement();
-        Element annotations = root.getFirstChildElement(ParserStringConstants.BEANS_SCAN_ANNOTATIONS);
-        if(annotations != null){
+    /**
+     * Get all the beans in the XML files and in annotations if they are expressed in the file.
+     * @return the map with the beans in the way <id,Bean>
+     * */
+    @Override
+    public Map<String, Bean> getBeans(){
+        try {
+            Document document = parser.build(this.getClass().getClassLoader().getResourceAsStream(this.fileName));
+            Element root = document.getRootElement();
+            Element annotations = root.getFirstChildElement(ParserStringConstants.BEANS_SCAN_ANNOTATIONS);
+            if(annotations != null){
             /*Hacer algo para parsear anotaciones*/
-            System.out.println("Hay que escanear paquete: " + annotations.getAttribute(ParserStringConstants.BEANS_SCAN_ANNOTATIONS_PACKAGE));
+                System.out.println("Hay que escanear paquete: " + annotations.getAttribute(ParserStringConstants.BEANS_SCAN_ANNOTATIONS_PACKAGE));
+            }
+            Elements children = root.getChildElements(ParserStringConstants.BEAN_LABEL);
+            Bean newBean;
+            for (int i = 0; i < children.size(); i++) {
+                newBean = this.createBean(children.get(i));
+                this.beansDefinition.put(newBean.getId(),newBean);
+            }
+            return this.beansDefinition;
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
         }
-        Elements children = root.getChildElements(ParserStringConstants.BEAN_LABEL);
-        Bean newBean;
-        for (int i = 0; i < children.size(); i++) {
-            newBean = this.createBean(children.get(i));
-            this.beansDefinition.put(newBean.getId(),newBean);
-        }
-        return this.beansDefinition;
     }
 
+    /**
+     * Create an instance of a bean from the data in the file.
+     * @param beanDefinition the tag in the file with the bean information
+     * @return the instance of the bean with the attributes setted
+     * */
     public Bean createBean(Element beanDefinition){
         try{
             Bean newBean = new Bean();
@@ -111,13 +135,16 @@ public class XmlParser implements Parser {
         }
     }
 
+    /**
+     * Set in the bean the constructor arguments and the setters parameters.
+     * @param beanArgs the tag with the paramenters
+     * @param newBean the bean in which the parameters have to be instanciated
+     * */
     public void getBeanArgs(Elements beanArgs, Bean newBean){
         Element argument;
         Parameter newParameter;
         List<Parameter> constructorArgs = new ArrayList<Parameter>();
-
         List<Parameter> properties = new ArrayList<Parameter>();
-        List<Bean> nestedBeans = new ArrayList<Bean>();
         for(int i =0; i < beanArgs.size(); i++){
             argument = beanArgs.get(i);
             switch (BeanArgument.getArgument(argument.getLocalName())){
@@ -143,6 +170,11 @@ public class XmlParser implements Parser {
         newBean.setProperties(properties);
     }
 
+    /**
+     * Set a parameter with the information of the constructor.
+     * @param info the tag with the information of the constructor parameter
+     * @return a parameter set for the constructor
+     * */
     private Parameter getConstructorInformation(Element info){
         Parameter parameter = new Parameter();
         ParameterElement parameterElement;
@@ -170,6 +202,11 @@ public class XmlParser implements Parser {
         return parameter;
     }
 
+    /**
+     * Set a parameter with the information of the setter method.
+     * @param info the tag with the information of the setter method
+     * @return a parameter set for the setter method
+     * */
     private Parameter getPropertiesInformation(Element info){
         Parameter parameter = new Parameter();
         ParameterElement parameterElement;
@@ -186,7 +223,7 @@ public class XmlParser implements Parser {
                     parameter.setName(propertyElementValue);
                     break;
                 case CLASS:
-                    parameter.setClassTypeName(propertyElementValue.toUpperCase());
+                    parameter.setClassTypeName(propertyElementValue);
                     parameter.setAutowireMode(AutowireMode.BYTYPE);
                     break;
             }
@@ -197,7 +234,7 @@ public class XmlParser implements Parser {
     public static void main(final String[] args)
     {
         try {
-            /*XmlApplicationContext xmlApplicationContext = new XmlApplicationContext("beans2.xml");
+            XmlApplicationContext xmlApplicationContext = new XmlApplicationContext("beans2.xml");
             House home = (House) xmlApplicationContext.getBean("home");
 
             Cat cat = (Cat) xmlApplicationContext.getBean("puchin");
@@ -210,7 +247,9 @@ public class XmlParser implements Parser {
             Cat cat2 =  xmlApplicationContext.getBean(Cat.class,"puchin");
             cat2.setName("Berlioz");
             System.out.println("Dad's name: " + home.getDad().getName());
-            System.out.println("Cat's name: " + cat2.getName());*/
+            System.out.println("Cat's name: " + cat2.getName());
+
+            xmlApplicationContext.close();
         }catch(Exception e){
             e.printStackTrace();
         }

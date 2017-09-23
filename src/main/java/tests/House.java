@@ -30,8 +30,8 @@ public class House {
         return dad;
     }
 
-    public void setDad(Person dad) {
-        this.dad = dad;
+    public void setDad(Person padre) {
+        this.dad = padre;
     }
 
     public Dog getDoggie() {
@@ -58,5 +58,6 @@ public class House {
 
     public void close(){
         this.cat = null;
+        System.out.println("Se cayó el chante...");
     }
 }
