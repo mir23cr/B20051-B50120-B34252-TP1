@@ -15,11 +15,12 @@
 
 	<bean id="pili" class="tests.Dog">
 	</bean>
-	
-	<bean id="puchin" class="tests.Cat" scope="prototype">
-		<!--<property name = "home" ref = "home"/>-->
-	</bean>
 
+	<!--
+	<bean id="puchin" class="tests.Cat" scope="prototype">
+		<property name = "home" ref = "home"/>
+	</bean>
+	-->
 
 	
 </beans>
