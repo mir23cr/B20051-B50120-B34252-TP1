@@ -1,4 +1,7 @@
-package tests;
+package tests.family;
+
+import tests.family.pets.Cat;
+import tests.family.pets.Dog;
 
 /**
  * @author Vladimir Aguilar

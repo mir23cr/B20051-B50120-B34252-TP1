@@ -1,6 +1,7 @@
-package tests;
+package tests.family.pets;
 
 import annotations.*;
+import tests.family.Person;
 
 /**
  * @author Vladimir Aguilar
@@ -12,6 +13,8 @@ public class Cat {
     private String name = "Puchina";
     private int age = 17;
     private Person owner;
+    private Dog friend;
+
 
     public Cat(){
     }
@@ -36,6 +39,23 @@ public class Cat {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public Person getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Person owner) {
+        this.owner = owner;
+    }
+
+    public Dog getFriend() {
+        return friend;
+    }
+
+    @Autowired
+    public void setFriend(Dog friend) {
+        this.friend = friend;
     }
 
     @PostConstruct

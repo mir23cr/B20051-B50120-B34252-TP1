@@ -1,23 +1,23 @@
 <beans default-init-method="init" default-destroy-method="destroy">
 
-	<component-scan base-package="tests"/>
+	<component-scan base-package="tests.family"/>
 
-	<bean id="home" class="tests.House" init-method="run" destroy-method="close">
+	<bean id="home" class="tests.family.House" init-method="run" destroy-method="close">
 		<constructor-arg index = "1" ref="puchin" />
 		<constructor-arg index = "0" ref="pili" />
 		<!--<constructor-arg index = "2" ref="daddy" />
-		<property name="hola" class="tests.Dog"/>-->
+		<property name="hola" class="tests.family.pets.Dog"/>-->
 		<property name="padre" ref="daddy"/>
 	</bean>
 
-	<bean id="daddy" class="tests.Person">
+	<bean id="daddy" class="tests.family.Person">
 	</bean>
 
-	<bean id="pili" class="tests.Dog">
+	<bean id="pili" class="tests.family.pets.Dog">
 	</bean>
 
 	<!--
-	<bean id="puchin" class="tests.Cat" scope="prototype">
+	<bean id="puchin" class="tests.family.pets.Cat" scope="prototype">
 		<property name = "home" ref = "home"/>
 	</bean>
 	-->

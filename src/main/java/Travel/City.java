@@ -1,11 +1,16 @@
 package Travel;
 
+import annotations.*;
+
+@Component("city")
 public class City {
     private String name;
     private Country country;
     private Airline airline;
 
-    public City() {
+    @Autowired
+    public City(@Qualifier("country") Country country) {
+        this.country = country;
     }
 
     public String getName() {
@@ -28,7 +33,19 @@ public class City {
         return airline;
     }
 
+    @Autowired
     public void setAirline(Airline airline) {
         this.airline = airline;
+    }
+
+    @PostConstruct
+    public void beginCity(){
+        this.name = "Chepe";
+        System.out.println("Welcome to: " + this.name + " in the country: " + this.country.getName());
+    }
+
+    @PreDestroy
+    public void destroyCity(){
+        System.out.println("All the citizens are dying...");
     }
 }

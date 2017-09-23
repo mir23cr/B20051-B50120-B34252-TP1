@@ -1,12 +1,13 @@
-package tests;
+package tests.family.pets;
 
 /**
  * @author Vladimir Aguilar
+ * Creation Date: 18/9/2017
  */
-public class Person {
-    private String name = "Juan";
+public class Dog {
+    private String name = "Pili";
 
-    public Person(){
+    public Dog() {
 
     }
 
@@ -19,10 +20,10 @@ public class Person {
     }
 
     public void init(){
-        System.out.println("Initializing person...");
+        System.out.println("Initializing dog...");
     }
 
     public void  destroy(){
-        System.out.println("Destroying person...");
+        System.out.println("Destroying dog...");
     }
 }

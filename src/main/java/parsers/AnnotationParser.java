@@ -72,7 +72,7 @@ public class AnnotationParser implements Parser {
         Bean bean = null;
         try {
             Class currentClass = Class.forName(classPath);
-            System.out.println(currentClass.getSimpleName());
+            //System.out.println(currentClass.getSimpleName());
 
             //Revisar si es un componente
             if (currentClass.isAnnotationPresent(Component.class)) {
@@ -105,7 +105,7 @@ public class AnnotationParser implements Parser {
             }
 
         } catch (ClassNotFoundException e) {
-            System.out.println("Class not found: " + classPath);
+            System.out.println("Invalid file: " + classPath);
         }
         return bean;
     }
