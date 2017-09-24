@@ -10,6 +10,7 @@ import annotations.Qualifier;
 public class Country {
     private String name;
 
+
     public Country() {
         this.name = "Costa Rica";
     }

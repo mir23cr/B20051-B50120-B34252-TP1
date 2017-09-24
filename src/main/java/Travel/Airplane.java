@@ -1,11 +1,19 @@
 package Travel;
 
+import annotations.*;
 
+@Component("airplane")
+@Scope("prototype")
 public class Airplane {
     private String id;
-    private Airplane airplane;
+    private Airline airline;
+    private Flight flight;
 
-    public Airplane() {
+    @Autowired
+    public Airplane( Airline airline, Flight flight) {
+        this.id = "5555";
+        this.airline = airline;
+        this.flight = flight;
     }
 
     public String getId() {
@@ -16,11 +24,16 @@ public class Airplane {
         this.id = id;
     }
 
-    public Airplane getAirplane() {
-        return airplane;
+    public Airline getAirplane() {
+        return airline;
     }
 
-    public void setAirplane(Airplane airplane) {
-        this.airplane = airplane;
+    public void Airline(Airline airplane) {
+        this.airline = airplane;
+    }
+
+    @PostConstruct
+    public void start(){
+        System.out.println("Initializing airplane...");
     }
 }

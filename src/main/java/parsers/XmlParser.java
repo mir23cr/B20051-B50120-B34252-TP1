@@ -4,10 +4,12 @@ package parsers;
 import java.io.IOException;
 import java.util.*;
 
+import Travel.Flight;
 import bean.AutowireMode;
 import bean.Bean;
 import bean.Parameter;
 import bean.ScopeEnum;
+import context.AnnotationApplicationContext;
 import context.ApplicationContext;
 import context.XmlApplicationContext;
 import nu.xom.*;
@@ -238,9 +240,12 @@ public class XmlParser implements Parser {
     public static void main(final String[] args)
     {
         try {
-            ApplicationContext xmlApplicationContext = new XmlApplicationContext("beans2.xml");
-            Cat cat = xmlApplicationContext.getBean(Cat.class,"puchin");
-            System.out.println(cat.getName());
+            ApplicationContext applicationContext = new AnnotationApplicationContext("Travel");
+            Flight flight = applicationContext.getBean(Flight.class,"flight");
+            //applicationContext.printContainer();
+            //ApplicationContext xmlApplicationContext = new XmlApplicationContext("beans2.xml");
+            //Cat cat = xmlApplicationContext.getBean(Cat.class,"puchin");
+            //System.out.println(cat.getName());
             /*
 
             House home = (House) xmlApplicationContext.getBean("home");
@@ -258,7 +263,7 @@ public class XmlParser implements Parser {
             System.out.println("Cat's name: " + cat2.getName());
             */
 
-            xmlApplicationContext.close();
+            //xmlApplicationContext.close();
         }catch(Exception e){
             e.printStackTrace();
         }
