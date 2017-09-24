@@ -12,7 +12,7 @@ import parsers.AnnotationParser;
 public class Test {
     
     public static void main(String[] args){
-        AnnotationParser ap = new AnnotationParser("");
+        AnnotationParser ap = new AnnotationParser("tests");
         ap.getBeans();
 
     }

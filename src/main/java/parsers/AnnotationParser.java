@@ -18,19 +18,21 @@ import bean.ScopeEnum;
 
 /**
  * @author Rodrigo Acuña
- * @
- * 0author Vladimir Aguilar
+ * @author Vladimir Aguilar
  * @author José Mesén
  * Creation Date: 9/9/2017
  */
 public class AnnotationParser implements Parser {
     String basePackagePath;
+    String userPackageSpecification;
     private Map<String,Bean> beans;
 
     public AnnotationParser(String packageLocation) {
+        userPackageSpecification = packageLocation;
         //linea de stack overflow
         String classesRootDirectory = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
-        File basePackage = new File(classesRootDirectory + packageLocation.replaceAll(".", "/"));
+
+        File basePackage = new File(classesRootDirectory + packageLocation.replace(".", "/"));
         basePackagePath = basePackage.getAbsolutePath();
         System.out.println(basePackagePath);
 
@@ -50,12 +52,12 @@ public class AnnotationParser implements Parser {
                 scanPackage(file);
             else {
                 String className = file.getName().replace(".class", "");
-                String classPath;
+                String classPath = userPackageSpecification +".";
                 if (currentPackage.getAbsolutePath() != basePackagePath) {
                     String currentPath = currentPackage.getPath().substring(basePackagePath.length() + 1);
-                    classPath = currentPath.replace("\\", ".") + "." + className;
+                    classPath += currentPath.replace("\\", ".") + "." + className;
                 } else
-                    classPath = className;
+                    classPath = userPackageSpecification +"."+ className;
                 Bean currentBean = scanClass(classPath);
                 if (currentBean != null)
                     beans.put(currentBean.getId(), currentBean);
@@ -156,9 +158,9 @@ public class AnnotationParser implements Parser {
                     }
                     arguments.add(constructorArgument);
                 }
-                if(foundConstructor)
-                    break;
             }
+            if(foundConstructor)
+                break;
         }
         return arguments;
     }
