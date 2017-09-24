@@ -17,12 +17,11 @@ public class Bean
     private ScopeEnum scopeType;
     private List<Parameter> constructorArguments;
     private List<Parameter> properties;
-    private boolean lazyInit;
+    private Boolean lazyInit;
 
 
     public Bean() {
         this.scopeType = ScopeEnum.SINGLETON;
-        this.lazyInit  = false;
     }
 
     public String getId() {
@@ -101,7 +100,7 @@ public class Bean
         return lazyInit;
     }
 
-    public void setLazyInit(boolean lazyInit) {
+    public void setLazyInit(Boolean lazyInit) {
         this.lazyInit = lazyInit;
     }
 }
