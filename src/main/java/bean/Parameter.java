@@ -62,4 +62,9 @@ public class Parameter {
     public void setClassTypeName(String classTypeName) {
         this.classTypeName = classTypeName;
     }
+
+    @Override
+    public String toString(){
+        return index + "\t" + classTypeName + "\t" + name + "\n" +autowireMode + "\t" +beanRef;
+    }
 }

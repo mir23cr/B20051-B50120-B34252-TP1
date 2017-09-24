@@ -37,13 +37,14 @@ public class AnnotationParser implements Parser {
         if (!basePackage.exists() || !basePackage.isDirectory())
             System.out.println("Incorrect Base Package");
         else {
+            beans = new HashMap<>();
             scanPackage(basePackage);
         }
     }
 
     public void scanPackage(File currentPackage) {
+
         File[] packageContents = currentPackage.listFiles();
-        Map<String, Bean> context = new HashMap<>();
         for (File file : packageContents) {
             if (file.isDirectory())
                 scanPackage(file);
@@ -57,10 +58,10 @@ public class AnnotationParser implements Parser {
                     classPath = className;
                 Bean currentBean = scanClass(classPath);
                 if (currentBean != null)
-                    context.put(currentBean.getId(), currentBean);
+                    beans.put(currentBean.getId(), currentBean);
             }
         }
-        this.beans = context;
+
     }
 
     private Bean scanClass(String classPath) {
@@ -73,6 +74,8 @@ public class AnnotationParser implements Parser {
             if (currentClass.isAnnotationPresent(Component.class)) {
                 //Se crea el bean.
                 bean = new Bean();
+                //Asignar class
+                bean.setClassType(classPath);
                 //Asignar bean id
                 String id = getBeanId(currentClass);
                 bean.setId(id);
@@ -186,7 +189,35 @@ public class AnnotationParser implements Parser {
 
     @Override
     public Map<String, Bean> getBeans() {
+        printContainer(beans);
         return beans;
+    }
+
+    public void printContainer(Map<String, Bean> container){
+        Bean bean;
+        for (Map.Entry<String,Bean> element : container.entrySet()){
+            System.out.println("Bean id: " + element.getKey());
+            bean = element.getValue();
+            System.out.println("Tipo de clase: " + bean.getClassType());
+            System.out.println("Modo de autowire: " + bean.getAutowireMode());
+            List<Parameter> constructorArguments = bean.getConstructorArguments();
+            System.out.println("Argumentos del constructor: " + constructorArguments.size());
+            printParameters(constructorArguments);
+            List<Parameter> properties = bean.getProperties();
+            System.out.println("Argumentos de las propiedades: " + properties.size());
+            printParameters(properties);
+            System.out.println("Método de init: " + bean.getInit());
+            System.out.println("Método de destroy: " + bean.getDestroy());
+            System.out.println();
+        }
+
+    }
+
+    private void printParameters(List<Parameter> constructorArguments) {
+        for (Parameter constructorArgument : constructorArguments) {
+            System.out.println(constructorArgument);
+
+        }
     }
 
 

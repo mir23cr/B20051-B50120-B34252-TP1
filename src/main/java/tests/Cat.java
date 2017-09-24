@@ -1,14 +1,13 @@
 package tests;
 
-import annotations.Autowired;
-import annotations.Component;
-import annotations.Qualifier;
+import annotations.*;
 
 /**
  * @author Vladimir Aguilar
  * Creation Date: 18/9/2017
  */
 @Component("cat1")
+@Scope("prototype")
 public class Cat {
     private String name = "Puchina";
     private int age = 17;
@@ -16,8 +15,8 @@ public class Cat {
 
     public Cat(){
     }
-
-    public Cat(House home) {
+    @Autowired
+    public Cat(@Qualifier("casa")House home) {
         this.home = home;
     }
 
@@ -25,9 +24,11 @@ public class Cat {
         return name;
     }
 
+    @Autowired
     public void setName(String name) {
         this.name = name;
     }
+
 
     public int getAge() {
         return age;
@@ -44,11 +45,12 @@ public class Cat {
     public void setHome(House home) {
         this.home = home;
     }
-
+    @PreDestroy
     public void init(){
         System.out.println("Initializing cat...");
     }
 
+    @PostConstruct
     public void  destroy(){
         System.out.println("Destroying cat...");
     }
