@@ -22,5 +22,6 @@
 	</bean>
 	-->
 
-	
+	<bean id="lacho" class="tests.family.House" init-method="run" destroy-method="close" lazy-init="true">
+	</bean>
 </beans>
