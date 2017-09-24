@@ -198,6 +198,7 @@ public class AnnotationParser implements Parser {
         for (Map.Entry<String,Bean> element : container.entrySet()){
             System.out.println("Bean id: " + element.getKey());
             bean = element.getValue();
+            System.out.println(bean.getScopeType());
             System.out.println("Tipo de clase: " + bean.getClassType());
             System.out.println("Modo de autowire: " + bean.getAutowireMode());
             List<Parameter> constructorArguments = bean.getConstructorArguments();

@@ -45,12 +45,12 @@ public class Cat {
     public void setHome(House home) {
         this.home = home;
     }
-    @PreDestroy
+    @PostConstruct
     public void init(){
         System.out.println("Initializing cat...");
     }
 
-    @PostConstruct
+    @PreDestroy
     public void  destroy(){
         System.out.println("Destroying cat...");
     }
