@@ -31,9 +31,11 @@ public class AnnotationParser implements Parser {
         userPackageSpecification = packageLocation;
         //linea de stack overflow
         String classesRootDirectory = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+        classesRootDirectory = classesRootDirectory.replace("%20"," ");
 
         File basePackage = new File(classesRootDirectory + packageLocation.replace(".", "/"));
         basePackagePath = basePackage.getAbsolutePath();
+
         System.out.println(basePackagePath);
 
         if (!basePackage.exists() || !basePackage.isDirectory())

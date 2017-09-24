@@ -1,6 +1,6 @@
-<beans default-init-method="init" default-destroy-method="destroy">
+<beans default-init-method="init" default-destroy-method="destroy" lazy-init = "false">
 
-	<component-scan base-package="tests.family"/>
+	<!--<component-scan base-package="tests.family"/>-->
 
 	<bean id="home" class="tests.family.House" init-method="run" destroy-method="close">
 		<constructor-arg index = "1" ref="puchin" />
@@ -16,11 +16,11 @@
 	<bean id="pili" class="tests.family.pets.Dog">
 	</bean>
 
-	<!--
+
 	<bean id="puchin" class="tests.family.pets.Cat" scope="prototype">
-		<property name = "home" ref = "home"/>
+
 	</bean>
-	-->
+
 
 	<bean id="lacho" class="tests.family.House" init-method="run" destroy-method="close" lazy-init="true">
 	</bean>
