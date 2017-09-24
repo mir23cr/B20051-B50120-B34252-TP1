@@ -23,8 +23,8 @@ import bean.ScopeEnum;
  * Creation Date: 9/9/2017
  */
 public class AnnotationParser implements Parser {
-    String basePackagePath;
-    String userPackageSpecification;
+    private String basePackagePath;
+    private String userPackageSpecification;
     private Map<String,Bean> beans;
 
     public AnnotationParser(String packageLocation) {

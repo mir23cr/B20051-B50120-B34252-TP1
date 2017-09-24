@@ -1,4 +1,4 @@
-<beans default-init-method="init" default-destroy-method="destroy" lazy-init = "false">
+<beans default-init-method="init" default-destroy-method="destroy" lazy-init = "true">
 
 	<!--<component-scan base-package="tests.family"/>-->
 
@@ -22,6 +22,6 @@
 	</bean>
 
 
-	<bean id="lacho" class="tests.family.House" init-method="run" destroy-method="close" lazy-init="true">
+	<bean id="lacho" class="tests.family.House" init-method="run" destroy-method="close" lazy-init="false">
 	</bean>
 </beans>

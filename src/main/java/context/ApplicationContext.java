@@ -114,7 +114,7 @@ public abstract class ApplicationContext implements ApplicationContextInterface
     protected void injectDependencies() {
         try {
             for (Map.Entry<String,Bean> element : container.entrySet()){
-                if(element.getValue().getScopeType() == ScopeEnum.SINGLETON){
+                if(element.getValue().getScopeType() == ScopeEnum.SINGLETON && !element.getValue().isLazyInit()){
                     this.injectSetters(element.getValue().getProperties(),element.getValue().getInstance());
                 }
             }
@@ -219,7 +219,7 @@ public abstract class ApplicationContext implements ApplicationContextInterface
             for (Map.Entry<String,Bean> element : this.container.entrySet()){
                 bean = element.getValue();
                 /*Constructor analysis*/
-                if(bean.getScopeType() == ScopeEnum.SINGLETON){
+                if(bean.getScopeType() == ScopeEnum.SINGLETON && !bean.isLazyInit()){
                     bean.setInstance(this.getNewBeanInstance(bean));
                     /*Call the postConstructMethod*/
                     if(bean.getInit() != null){

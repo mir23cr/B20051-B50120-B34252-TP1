@@ -96,7 +96,7 @@ public class Bean
         this.properties = properties;
     }
 
-    public boolean isLazyInit() {
+    public Boolean isLazyInit() {
         return lazyInit;
     }
 

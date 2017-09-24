@@ -9,6 +9,7 @@ public enum BeanProperty {
     SCOPE,
     INIT,
     DESTROY,
+    LAZYINIT,
     ERROR;
 
     public static BeanProperty getProperty(String propertyName){
@@ -24,6 +25,8 @@ public enum BeanProperty {
             property = DESTROY;
         }else if(propertyName.equals("scope")){
             property = SCOPE;
+        }else if(propertyName.equals("lazy-init")){
+            property = LAZYINIT;
         }
         return property;
     }

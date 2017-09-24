@@ -13,4 +13,5 @@ public class ParserStringConstants {
     public static final String BEANS_DEFAULT_DESTROY = "default-destroy-method";
     public static final String BEANS_SCAN_ANNOTATIONS = "component-scan";
     public static final String BEANS_SCAN_ANNOTATIONS_PACKAGE ="base-package";
+    public static final String BEANS_SCAN_LAZY_INIT = "lazy-init";
 }

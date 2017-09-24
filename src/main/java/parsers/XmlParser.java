@@ -13,6 +13,7 @@ import context.AnnotationApplicationContext;
 import context.ApplicationContext;
 import context.XmlApplicationContext;
 import nu.xom.*;
+import tests.family.House;
 import tests.family.pets.Cat;
 
 /**
@@ -27,7 +28,7 @@ public class XmlParser implements Parser {
     private Builder parser;
     private Map<String,Bean> beansDefinition;
     private String fileName;
-    //private Bean newBean;
+    private Boolean defaultLazyInit;
 
 
     public XmlParser(String fileName){
@@ -68,6 +69,11 @@ public class XmlParser implements Parser {
         try {
             Document document = parser.build(this.getClass().getClassLoader().getResourceAsStream(this.fileName));
             Element root = document.getRootElement();
+            Attribute lazyInit = root.getAttribute(ParserStringConstants.BEANS_SCAN_LAZY_INIT);
+            if(lazyInit != null){
+                this.defaultLazyInit = Boolean.parseBoolean(lazyInit.getValue());
+            }
+
             Element annotations = root.getFirstChildElement(ParserStringConstants.BEANS_SCAN_ANNOTATIONS);
             if(annotations != null){
                 AnnotationParser annotationParser = new AnnotationParser(
@@ -81,6 +87,9 @@ public class XmlParser implements Parser {
             Bean newBean;
             for (int i = 0; i < children.size(); i++) {
                 newBean = this.createBean(children.get(i));
+                if(newBean.isLazyInit() == null){
+                    newBean.setLazyInit((this.defaultLazyInit != null)?this.defaultLazyInit:false);
+                }
                 this.beansDefinition.put(newBean.getId(),newBean);
             }
             return this.beansDefinition;
@@ -124,6 +133,9 @@ public class XmlParser implements Parser {
                     case SCOPE:
                         //System.out.print("Se vio un scope ");
                         newBean.setScopeType(ScopeEnum.valueOf(propertyValue.toUpperCase()));
+                        break;
+                    case LAZYINIT:
+                        newBean.setLazyInit(Boolean.parseBoolean(propertyValue));
                         break;
                     default:
                         //System.out.println("Error");
@@ -240,11 +252,13 @@ public class XmlParser implements Parser {
     public static void main(final String[] args)
     {
         try {
-            ApplicationContext applicationContext = new AnnotationApplicationContext("Travel");
-            Flight flight = applicationContext.getBean(Flight.class,"flight");
+            /*ApplicationContext applicationContext = new AnnotationApplicationContext("Travel");
+            Flight flight = applicationContext.getBean(Flight.class,"flight");*/
             //applicationContext.printContainer();
-            //ApplicationContext xmlApplicationContext = new XmlApplicationContext("beans2.xml");
-            //Cat cat = xmlApplicationContext.getBean(Cat.class,"puchin");
+
+            ApplicationContext xmlApplicationContext = new XmlApplicationContext("beans2.xml");
+            Cat cat = xmlApplicationContext.getBean(Cat.class,"puchin");
+            //House home = xmlApplicationContext.getBean(House.class,"home");
             //System.out.println(cat.getName());
             /*
 
