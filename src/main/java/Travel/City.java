@@ -3,6 +3,7 @@ package Travel;
 import annotations.*;
 
 @Component("city")
+@Lazy
 public class City {
     private String name;
     private Country country;

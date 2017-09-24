@@ -4,6 +4,7 @@ package parsers;
 import java.io.IOException;
 import java.util.*;
 
+import Travel.City;
 import Travel.Flight;
 import bean.AutowireMode;
 import bean.Bean;
@@ -252,12 +253,13 @@ public class XmlParser implements Parser {
     public static void main(final String[] args)
     {
         try {
-            /*ApplicationContext applicationContext = new AnnotationApplicationContext("Travel");
-            Flight flight = applicationContext.getBean(Flight.class,"flight");*/
+            ApplicationContext applicationContext = new AnnotationApplicationContext("Travel");
+            City city = applicationContext.getBean(City.class,"city");
+            //Flight flight = applicationContext.getBean(Flight.class,"flight");
             //applicationContext.printContainer();
 
-            ApplicationContext xmlApplicationContext = new XmlApplicationContext("beans2.xml");
-            Cat cat = xmlApplicationContext.getBean(Cat.class,"puchin");
+            //ApplicationContext xmlApplicationContext = new XmlApplicationContext("beans2.xml");
+            //Cat cat = xmlApplicationContext.getBean(Cat.class,"puchin");
             //House home = xmlApplicationContext.getBean(House.class,"home");
             //System.out.println(cat.getName());
             /*

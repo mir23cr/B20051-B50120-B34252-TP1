@@ -88,6 +88,8 @@ public class AnnotationParser implements Parser {
                 //Asignar scope
                 ScopeEnum scope = getScope(currentClass);
                 bean.setScopeType(scope);
+                //Asinar lazyInit
+                bean.setLazyInit(getLazy(currentClass));
                 //Asignar Parametros de Constructor SOLO SE PUEDE UN CONSTRUCTOR CON AUTOWIRE
                 List<Parameter> constructorArguments = getConstructorArguments(currentClass);
                 bean.setConstructorArguments(constructorArguments);
@@ -136,6 +138,14 @@ public class AnnotationParser implements Parser {
         if (scope != null && scope.value().toLowerCase().compareTo("prototype") == 0)
             scopeEnum = ScopeEnum.PROTOTYPE;
         return scopeEnum;
+    }
+
+    private boolean getLazy(Class currentClass) {
+        boolean lazy = false;
+        Lazy lazyInit = (Lazy) currentClass.getAnnotation(Lazy.class);
+        if (lazyInit != null)
+            lazy = true;
+        return lazy;
     }
 
     public List<Parameter> getConstructorArguments(Class currentClass) {
@@ -225,6 +235,4 @@ public class AnnotationParser implements Parser {
 
         }
     }
-
-
 }
