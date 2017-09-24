@@ -52,7 +52,9 @@ public class AnnotationParser implements Parser {
                 scanPackage(file);
             else {
                 String className = file.getName().replace(".class", "");
-                String classPath = userPackageSpecification +".";
+                String classPath = "";
+                if(userPackageSpecification.length()>0 && userPackageSpecification.compareTo(".") !=0)
+                    classPath += userPackageSpecification +".";
                 if (currentPackage.getAbsolutePath() != basePackagePath) {
                     String currentPath = currentPackage.getPath().substring(basePackagePath.length() + 1);
                     classPath += currentPath.replace("\\", ".") + "." + className;
