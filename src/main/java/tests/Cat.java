@@ -6,8 +6,8 @@ import annotations.*;
  * @author Vladimir Aguilar
  * Creation Date: 18/9/2017
  */
-@Component("cat1")
-@Scope("prototype")
+/*@Component("cat1")
+@Scope("prototype")*/
 public class Cat {
     private String name = "Puchina";
     private int age = 17;
@@ -15,8 +15,8 @@ public class Cat {
 
     public Cat(){
     }
-    @Autowired
-    public Cat(@Qualifier("casa")House home) {
+    //@Autowired
+    public Cat(/*@Qualifier("casa")*/House home) {
         this.home = home;
     }
 
@@ -24,7 +24,7 @@ public class Cat {
         return name;
     }
 
-    @Autowired
+    //@Autowired
     public void setName(String name) {
         this.name = name;
     }
@@ -45,12 +45,12 @@ public class Cat {
     public void setHome(House home) {
         this.home = home;
     }
-    @PostConstruct
+    //@PostConstruct
     public void init(){
         System.out.println("Initializing cat...");
     }
 
-    @PreDestroy
+    //@PreDestroy
     public void  destroy(){
         System.out.println("Destroying cat...");
     }

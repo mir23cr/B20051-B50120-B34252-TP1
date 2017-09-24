@@ -193,7 +193,7 @@ public class AnnotationParser implements Parser {
 
     @Override
     public Map<String, Bean> getBeans() {
-        printContainer(beans);
+        //printContainer(beans);
         return beans;
     }
 
@@ -204,7 +204,6 @@ public class AnnotationParser implements Parser {
             bean = element.getValue();
             System.out.println(bean.getScopeType());
             System.out.println("Tipo de clase: " + bean.getClassType());
-            System.out.println("Modo de autowire: " + bean.getAutowireMode());
             List<Parameter> constructorArguments = bean.getConstructorArguments();
             System.out.println("Argumentos del constructor: " + constructorArguments.size());
             printParameters(constructorArguments);
