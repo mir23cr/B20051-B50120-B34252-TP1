@@ -1,11 +1,10 @@
 package parsers;
 
 import annotations.*;
-import bean.AutowireMode;
+import enums.AutowireMode;
 import bean.Bean;
 
 import java.io.File;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -14,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import bean.Parameter;
-import bean.ScopeEnum;
+import enums.ScopeEnum;
 
 /**
  * @author Rodrigo Acuña
@@ -135,7 +134,7 @@ public class AnnotationParser implements Parser {
     private ScopeEnum getScope(Class currentClass) {
         ScopeEnum scopeEnum = ScopeEnum.SINGLETON;
         Scope scope = (Scope) currentClass.getAnnotation(Scope.class);
-        if (scope != null && scope.value().toLowerCase().compareTo("prototype") == 0)
+        if (scope != null && scope.value() == ScopeEnum.PROTOTYPE)
             scopeEnum = ScopeEnum.PROTOTYPE;
         return scopeEnum;
     }

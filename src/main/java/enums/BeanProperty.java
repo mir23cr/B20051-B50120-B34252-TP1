@@ -1,4 +1,4 @@
-package parsers;
+package enums;
 
 /**
  * Creation Date: 9/9/2017

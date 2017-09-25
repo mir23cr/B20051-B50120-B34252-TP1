@@ -2,8 +2,7 @@ package bean;
 
 import java.util.List;
 
-import annotations.Component;
-import annotations.Scope;
+import enums.ScopeEnum;
 
 //@Component
 public class Bean

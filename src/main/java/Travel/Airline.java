@@ -4,9 +4,10 @@ import annotations.Component;
 import annotations.PostConstruct;
 import annotations.PreDestroy;
 import annotations.Scope;
+import enums.ScopeEnum;
 
 @Component("airline")
-@Scope("singleton")
+@Scope(ScopeEnum.SINGLETON)
 public class Airline {
     private String name;
 
@@ -24,7 +25,7 @@ public class Airline {
     @PostConstruct
     public void init(){
         this.name = "American Airlines";
-        System.out.println("Bienvenidos a" + this.name);
+        System.out.println("Bienvenidos a " + this.name);
     }
 
     @PreDestroy

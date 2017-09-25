@@ -5,17 +5,16 @@ import java.io.IOException;
 import java.util.*;
 
 import Travel.City;
-import Travel.Flight;
-import bean.AutowireMode;
+import enums.AutowireMode;
 import bean.Bean;
 import bean.Parameter;
-import bean.ScopeEnum;
+import enums.ScopeEnum;
 import context.AnnotationApplicationContext;
 import context.ApplicationContext;
-import context.XmlApplicationContext;
+import enums.BeanArgument;
+import enums.BeanProperty;
+import enums.ParameterElement;
 import nu.xom.*;
-import tests.family.House;
-import tests.family.pets.Cat;
 
 /**
  * Parser for the XML Files.

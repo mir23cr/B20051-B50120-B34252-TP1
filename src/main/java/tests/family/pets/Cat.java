@@ -1,6 +1,7 @@
 package tests.family.pets;
 
 import annotations.*;
+import enums.ScopeEnum;
 import tests.family.Person;
 
 /**
@@ -8,7 +9,7 @@ import tests.family.Person;
  * Creation Date: 18/9/2017
  */
 @Component("puchin")
-@Scope("prototype")
+@Scope(ScopeEnum.PROTOTYPE)
 public class Cat {
     private String name = "Puchina";
     private int age = 17;

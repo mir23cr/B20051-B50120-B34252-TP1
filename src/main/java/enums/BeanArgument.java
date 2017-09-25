@@ -1,4 +1,4 @@
-package parsers;
+package enums;
 
 public enum BeanArgument {
     CONSTRUCTOR_ARG,

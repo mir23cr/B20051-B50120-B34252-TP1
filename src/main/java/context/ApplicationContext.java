@@ -1,8 +1,8 @@
 package context;
-import bean.AutowireMode;
+import enums.AutowireMode;
 import bean.Bean;
 import bean.Parameter;
-import bean.ScopeEnum;
+import enums.ScopeEnum;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;

@@ -1,9 +1,10 @@
 package Travel;
 
 import annotations.*;
+import enums.ScopeEnum;
 
 @Component("airplane")
-@Scope("prototype")
+@Scope(ScopeEnum.PROTOTYPE)
 public class Airplane {
     private String id;
     private Airline airline;

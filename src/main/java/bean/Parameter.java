@@ -1,6 +1,6 @@
 package bean;
 
-import java.util.Comparator;
+import enums.AutowireMode;
 
 public class Parameter {
     private Integer index;

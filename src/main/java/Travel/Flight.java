@@ -1,13 +1,14 @@
 package Travel;
 
 import annotations.*;
+import enums.ScopeEnum;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Component("flight")
-@Scope("prototype")
+@Scope(ScopeEnum.PROTOTYPE)
 public class Flight {
     private String date;
     private City from;
