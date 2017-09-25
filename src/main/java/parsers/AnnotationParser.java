@@ -54,13 +54,12 @@ public class AnnotationParser implements Parser {
             else {
                 String className = file.getName().replace(".class", "");
                 String classPath = "";
-                String currentOs = System.getProperty("os.name");
-                System.out.println("Sistema operativo: " + currentOs);
+                String currentOs = System.getProperty("os.name").split(" ")[0];
                 if(userPackageSpecification.length()>0 && userPackageSpecification.compareTo(".") !=0)
                     classPath += userPackageSpecification +".";
                 if (currentPackage.getAbsolutePath() != basePackagePath) {
                     String currentPath = currentPackage.getPath().substring(basePackagePath.length() + 1);
-                    if(!currentOs.equals("Linux")){
+                    if(currentOs.equals("Windows")){
                         classPath += currentPath.replace("\\", ".") + "." + className;
                     }else{
                         classPath += currentPath.replace("/",".") + "." + className;
