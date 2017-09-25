@@ -254,6 +254,7 @@ public class XmlParser implements Parser {
         try {
             ApplicationContext applicationContext = new AnnotationApplicationContext("Travel");
             City city = applicationContext.getBean(City.class,"city");
+            ApplicationContext applicationContext1 = new AnnotationApplicationContext("tests.test1");
             //Flight flight = applicationContext.getBean(Flight.class,"flight");
             //applicationContext.printContainer();
 

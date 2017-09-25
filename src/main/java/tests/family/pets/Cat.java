@@ -11,8 +11,8 @@ import tests.family.Person;
 @Component("puchin")
 @Scope(ScopeEnum.PROTOTYPE)
 public class Cat {
-    private String name = "Puchina";
-    private int age = 17;
+    private String name;
+    private int age;
     private Person owner;
     private Dog friend;
 
@@ -61,6 +61,8 @@ public class Cat {
 
     @PostConstruct
     public void init(){
+        this.name = "Puchina";
+        this.age = 17;
         System.out.println("Initializing cat...");
     }
 
