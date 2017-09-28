@@ -8,12 +8,22 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.*;
 
+
+/**
+ * Class that  manages the container of Inversion of Control
+ * @author Vladimir Aguilar
+ * @author Rodrigo Acuña
+ * @author José Mesén
+ * */
 public abstract class ApplicationContext implements ApplicationContextInterface
 {
     protected Map<String,Bean> container;
-    protected String defaultInit;
-    protected String defaultDestroy;
 
+    /**
+     * Get the instance of a bean in the object mode.
+     * @param beanId the id of the bean
+     * @return the instance of the bean
+     * */
     public Object getBean(String beanId) {
         Bean requestedBean = this.container.get(beanId);
         Object result = null;
@@ -44,10 +54,20 @@ public abstract class ApplicationContext implements ApplicationContextInterface
         return result;
     }
 
+    /**
+     * Get the instance of a bean in the instance mode.
+     * @param beanId the id of the bean
+     * @return the instance of the bean
+     * */
     public <T> T getBean(Class<T> classType, String beanId) {
         return classType.cast(this.getBean(beanId));
     }
 
+    /**
+     * Creates a new instance of the bean.
+     * @param bean
+     * @return The new instance of the bean
+     * */
     @SuppressWarnings("unchecked")
     private Object getNewBeanInstance(Bean bean){
         try {
@@ -81,6 +101,11 @@ public abstract class ApplicationContext implements ApplicationContextInterface
         return null;
     }
 
+    /**
+     * Inject the setters for the instance.
+     * @param setters the list of the setters
+     * @param object the object that needs to be instanciated
+     * */
     private void injectSetters(List<Parameter> setters, Object object){
         try {
             Class refClass;
@@ -111,6 +136,9 @@ public abstract class ApplicationContext implements ApplicationContextInterface
         }
     }
 
+    /**
+     * Inject all the dependencias per bean in the container.
+     * */
     protected void injectDependencies() {
         try {
             for (Map.Entry<String,Bean> element : container.entrySet()){
@@ -123,6 +151,10 @@ public abstract class ApplicationContext implements ApplicationContextInterface
         }
     }
 
+    /**
+     * Call the init method for the singleton bean.
+     * @param bean
+     * */
     private void callInitMethodSingleton(Bean bean){
         try {
             Method initMethod = bean.getInstance().getClass().getMethod(bean.getInit());
@@ -132,6 +164,11 @@ public abstract class ApplicationContext implements ApplicationContextInterface
         }
     }
 
+    /**
+     * Call the init method for the prototype bean.
+     * @param bean
+     * @param object the instanced object
+     * */
     private void callInitMethodPrototype(Bean bean, Object object){
         try {
             Method initMethod = Class.forName(bean.getClassType()).getMethod(bean.getInit());
@@ -193,15 +230,9 @@ public abstract class ApplicationContext implements ApplicationContextInterface
 
     protected void setBeanSettings() throws Exception {
         Bean bean;
+        /*Change the autowired byType for byName*/
         for (Map.Entry<String,Bean> element : this.container.entrySet()){
             bean = element.getValue();
-            if(bean.getInit()==null){
-                bean.setInit(this.defaultInit);
-            }
-            if(bean.getDestroy()==null){
-                bean.setDestroy(this.defaultDestroy);
-            }
-
             for(Parameter p: bean.getConstructorArguments()){
                 if(p.getAutowireMode() == AutowireMode.BYTYPE){
                     this.classToRef(p);
@@ -229,7 +260,7 @@ public abstract class ApplicationContext implements ApplicationContextInterface
 
             }
         }else {
-            System.out.println("There are cycles in the bean's construction, please solve this.");
+            System.out.println("There are cycles in the bean's dependencies, please solve this.");
             System.exit(1);
         }
 

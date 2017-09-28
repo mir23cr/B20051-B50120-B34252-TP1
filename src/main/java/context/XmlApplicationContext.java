@@ -9,8 +9,6 @@ public  class XmlApplicationContext extends ApplicationContext {
     public XmlApplicationContext(String fileName){
         try {
             this.xmlParser = new XmlParser(fileName);
-            this.defaultInit = this.xmlParser.getDefaultInitMethod();
-            this.defaultDestroy = this.xmlParser.getDefaultDestroyMethod();
             this.registerBeans();
             //this.injectDependencies();
         }catch (Exception e){
