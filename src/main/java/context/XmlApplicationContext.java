@@ -20,6 +20,8 @@ public  class XmlApplicationContext extends ApplicationContext {
     public void registerBeans() {
         try {
             this.container = this.xmlParser.getBeans();
+            this.defaultInit = this.xmlParser.getDefaultInitMethod();
+            this.defaultDestroy = this.xmlParser.getDefaultDestroyMethod();
             this.setBeanSettings();
             this.injectDependencies();
         } catch (Exception e) {

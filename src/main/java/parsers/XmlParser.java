@@ -32,8 +32,6 @@ public class XmlParser implements Parser {
     private Map<String,Bean> beansDefinition;
     private String fileName;
     private Boolean defaultLazyInit;
-    private String defaultInitMethod;
-    private String defaultDestroyMethod;
 
     public XmlParser(String fileName){
         this.fileName = fileName;
@@ -46,7 +44,10 @@ public class XmlParser implements Parser {
      * @return the name of the init method or null if it not exist
      * */
     public String getDefaultInitMethod() throws ParsingException, IOException {
-        return this.defaultInitMethod;
+        Document document = parser.build(this.getClass().getClassLoader().getResourceAsStream(this.fileName));
+        Element root = document.getRootElement();
+        Attribute attribute = root.getAttribute(ParserStringConstants.BEANS_DEFAULT_INIT);
+        return (attribute!=null)? attribute.getValue():null;
     }
 
     /**
@@ -54,7 +55,10 @@ public class XmlParser implements Parser {
      * @return the name of the init method or null if it not exist
      * */
     public String getDefaultDestroyMethod() throws ParsingException, IOException {
-        return this.defaultDestroyMethod;
+        Document document = parser.build(this.getClass().getClassLoader().getResourceAsStream(this.fileName));
+        Element root = document.getRootElement();
+        Attribute attribute = root.getAttribute(ParserStringConstants.BEANS_DEFAULT_DESTROY);
+        return (attribute!=null)? attribute.getValue():null;
     }
 
 
@@ -67,10 +71,6 @@ public class XmlParser implements Parser {
         try {
             Document document = parser.build(this.getClass().getClassLoader().getResourceAsStream(this.fileName));
             Element root = document.getRootElement();
-            Attribute defaultInit = root.getAttribute(ParserStringConstants.BEANS_DEFAULT_INIT);
-            this.defaultInitMethod = (defaultInit!=null)? defaultInit.getValue():null;
-            Attribute defaultDestroy = root.getAttribute(ParserStringConstants.BEANS_DEFAULT_DESTROY);
-            this.defaultDestroyMethod = (defaultDestroy!=null)? defaultDestroy.getValue():null;
             Attribute lazyInit = root.getAttribute(ParserStringConstants.BEANS_SCAN_LAZY_INIT);
             if(lazyInit != null){
                 this.defaultLazyInit = Boolean.parseBoolean(lazyInit.getValue());
@@ -144,14 +144,6 @@ public class XmlParser implements Parser {
                         break;
                 }
                 //System.out.println(beanDefinition.getAttribute(j).getValue());
-            }
-
-            if(newBean.getInit() == null){
-                newBean.setInit(this.defaultInitMethod);
-            }
-
-            if(newBean.getDestroy() == null){
-                newBean.setDestroy(this.defaultDestroyMethod);
             }
 
             this.getBeanArgs(beanDefinition.getChildElements(), newBean);
@@ -262,9 +254,9 @@ public class XmlParser implements Parser {
     public static void main(final String[] args)
     {
         try {
-            //ApplicationContext applicationContext = new AnnotationApplicationContext("Travel");
-            //City city = applicationContext.getBean(City.class,"city");
-            //ApplicationContext applicationContext1 = new AnnotationApplicationContext("tests.test1");
+            /*ApplicationContext applicationContext = new AnnotationApplicationContext("Travel");
+            City city = applicationContext.getBean(City.class,"city");
+            ApplicationContext applicationContext1 = new AnnotationApplicationContext("tests.test1");*/
             //Flight flight = applicationContext.getBean(Flight.class,"flight");
             //applicationContext.printContainer();
 

@@ -18,6 +18,8 @@ import java.util.*;
 public abstract class ApplicationContext implements ApplicationContextInterface
 {
     protected Map<String,Bean> container;
+    protected String defaultInit;
+    protected String defaultDestroy;
 
     /**
      * Get the instance of a bean in the object mode.
@@ -230,9 +232,15 @@ public abstract class ApplicationContext implements ApplicationContextInterface
 
     protected void setBeanSettings() throws Exception {
         Bean bean;
-        /*Change the autowired byType for byName*/
         for (Map.Entry<String,Bean> element : this.container.entrySet()){
             bean = element.getValue();
+            if(bean.getInit()==null){
+                bean.setInit(this.defaultInit);
+            }
+            if(bean.getDestroy()==null){
+                bean.setDestroy(this.defaultDestroy);
+            }
+
             for(Parameter p: bean.getConstructorArguments()){
                 if(p.getAutowireMode() == AutowireMode.BYTYPE){
                     this.classToRef(p);
