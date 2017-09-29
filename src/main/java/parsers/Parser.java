@@ -10,10 +10,13 @@ import java.util.Map;
  * @author Rodrigo Acuña
  * @author Vladimir Aguilar
  * @author José Mesén
- * Creation Date: 9/9/2017
  */
 public interface Parser {
 
+    /**
+     * Get all the beans for the annotations or the XML file
+     * @return a map with the container.
+     */
     Map<String, Bean> getBeans();
 
 

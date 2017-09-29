@@ -2,6 +2,12 @@ package context;
 
 import parsers.AnnotationParser;
 
+/**
+ * Application context for Annotations based container.
+ * @author Vladimir Aguilar
+ * @author Jose Mesén
+ */
+
 public class AnnotationApplicationContext extends ApplicationContext {
     private AnnotationParser annotationParser;
 
@@ -14,7 +20,6 @@ public class AnnotationApplicationContext extends ApplicationContext {
         }
     }
 
-    /*Seteo instancias*/
     public void registerBeans() {
         try {
             this.container = this.annotationParser.getBeans();

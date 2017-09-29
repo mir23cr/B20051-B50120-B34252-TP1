@@ -2,14 +2,19 @@ package bean;
 
 import enums.AutowireMode;
 
+/**
+ * Class that stores the meta-data for the setters and constructor arguments.
+ * Also includes the instance if the Bean is Singleton.
+ * @author Vladimir Aguilar
+ * @author Jose Mesén
+ * @author Rodrigo Acuña
+ */
 public class Parameter {
     private Integer index;
     private String name;
     private String classTypeName;
     private String beanRef;
     private AutowireMode autowireMode;
-    private Object instance;
-
 
     public Parameter() {
         this.autowireMode = AutowireMode.NO;
@@ -37,14 +42,6 @@ public class Parameter {
 
     public void setBeanRef(String beanRef) {
         this.beanRef = beanRef;
-    }
-
-    public Object getInstance() {
-        return instance;
-    }
-
-    public void setInstance(Object instance) {
-        this.instance = instance;
     }
 
     public AutowireMode getAutowireMode() {

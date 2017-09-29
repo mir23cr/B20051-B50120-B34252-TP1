@@ -15,11 +15,16 @@ import java.util.*;
  * @author Rodrigo Acuña
  * @author José Mesén
  * */
-public abstract class ApplicationContext implements ApplicationContextInterface
-{
+public abstract class ApplicationContext {
     protected Map<String,Bean> container;
     protected String defaultInit;
     protected String defaultDestroy;
+
+
+    /**
+     * Calls all the methods to instanciate the container.
+     */
+    abstract void registerBeans();
 
     /**
      * Get the instance of a bean in the object mode.
@@ -139,7 +144,7 @@ public abstract class ApplicationContext implements ApplicationContextInterface
     }
 
     /**
-     * Inject all the dependencias per bean in the container.
+     * Inject all the dependencies per bean in the container.
      * */
     protected void injectDependencies() {
         try {
@@ -181,41 +186,20 @@ public abstract class ApplicationContext implements ApplicationContextInterface
     }
 
 
-    public void close() {
-        try {
-            Method destroyMethod;
-            for (Map.Entry<String,Bean> element : container.entrySet()){
-                if(element.getValue().getScopeType() == ScopeEnum.SINGLETON){
-                    if(element.getValue().getDestroy()!= null){
-                        destroyMethod = Class.forName(element.getValue().getClassType()).getMethod(element.getValue().getDestroy());
-                        destroyMethod.invoke(element.getValue().getInstance());
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void printContainer(){
-        Bean bean;
-        for (Map.Entry<String,Bean> element : container.entrySet()){
-            System.out.println("Bean id: " + element.getKey());
-            bean = element.getValue();
-            System.out.println("Tipo de clase: " + bean.getClassType());
-            System.out.println("Argumentos del constructor: " + bean.getConstructorArguments().size());
-            System.out.println("Argumentos de las propiedades: " + bean.getProperties().size());
-            System.out.println("Método de init: " + bean.getInit());
-            System.out.println("Método de destroy: " + bean.getDestroy());
-            System.out.println();
-        }
-
-    }
-
+    /**
+     * Method that indicates if a Bean is in the container.
+     * @param beanId
+     * @return true if the bean is contained or false otherwise.
+     */
     public boolean containsBean(String beanId) {
         return container.containsKey(beanId);
     }
 
+    /**
+     * Check if the bean is singleton.
+     * @param beanId
+     * @return true if the bean is singleton or false otherwise.
+     */
     public boolean isSingleton(String beanId) {
         boolean result = false;
         if (container.get(beanId).getScopeType() == ScopeEnum.SINGLETON)
@@ -230,6 +214,10 @@ public abstract class ApplicationContext implements ApplicationContextInterface
         return result;
     }
 
+    /**
+     * Set some beans meta-data and call the methods to set dependencies.
+     * @throws Exception
+     */
     protected void setBeanSettings() throws Exception {
         Bean bean;
         for (Map.Entry<String,Bean> element : this.container.entrySet()){
@@ -274,6 +262,10 @@ public abstract class ApplicationContext implements ApplicationContextInterface
 
     }
 
+    /**
+     * Converts an autowired byType for an autowired byName.
+     * @param parameter
+     */
     private void classToRef(Parameter parameter){
         try {
             Iterator<Map.Entry<String,Bean>> iterator = this.container.entrySet().iterator();
@@ -296,6 +288,10 @@ public abstract class ApplicationContext implements ApplicationContextInterface
 
     }
 
+    /**
+     * Calls the method to check if the container has cycles in the dependencies.
+     * @return true if the container has cycles, false otherwise.
+     */
     private boolean hasCycles(){
         Set<String> visitedBeans = new HashSet<>();
         for (Map.Entry<String,Bean> element : container.entrySet()){
@@ -306,6 +302,12 @@ public abstract class ApplicationContext implements ApplicationContextInterface
         return false;
     }
 
+    /**
+     * Checks if the container has cycles in the dependencies.
+     * @param bean
+     * @param visitedBeans
+     * @return true if the container has cycles, false otherwise.
+     */
     private boolean hasCycles(Bean bean, Set<String> visitedBeans){
         /*If the set contains the bean, then there is a cycle.*/
         if(visitedBeans.contains(bean.getId())){
@@ -329,4 +331,24 @@ public abstract class ApplicationContext implements ApplicationContextInterface
         visitedBeans.remove(bean.getId());
         return false;
     }
+
+    /**
+     * Call the pre-destroy method established per singleton bean
+     */
+    public void close() {
+        try {
+            Method destroyMethod;
+            for (Map.Entry<String,Bean> element : container.entrySet()){
+                if(element.getValue().getScopeType() == ScopeEnum.SINGLETON){
+                    if(element.getValue().getDestroy()!= null){
+                        destroyMethod = Class.forName(element.getValue().getClassType()).getMethod(element.getValue().getDestroy());
+                        destroyMethod.invoke(element.getValue().getInstance());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

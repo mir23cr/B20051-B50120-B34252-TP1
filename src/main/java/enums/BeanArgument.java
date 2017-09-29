@@ -1,5 +1,9 @@
 package enums;
 
+/**
+ * Enum with the arguments that a bean could have.
+ * @author Vladimir Aguilar
+ */
 public enum BeanArgument {
     CONSTRUCTOR_ARG,
     PROPERTY,
@@ -8,10 +12,13 @@ public enum BeanArgument {
     public static BeanArgument getArgument(String argumentName){
         argumentName = argumentName.toLowerCase();
         BeanArgument argument = ERROR;
-        if(argumentName.equals("constructor-arg")){
-            argument = CONSTRUCTOR_ARG;
-        }else if(argumentName.equals("property")){
-            argument = PROPERTY;
+        switch (argumentName){
+            case "constructor-arg":
+                argument = CONSTRUCTOR_ARG;
+                break;
+            case "property":
+                argument = PROPERTY;
+                break;
         }
         return argument;
     }

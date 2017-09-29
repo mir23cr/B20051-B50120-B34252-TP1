@@ -4,13 +4,18 @@ import java.util.List;
 
 import enums.ScopeEnum;
 
-//@Component
+/**
+ * Class that stores the meta-data for the instances of the bean.
+ * Also includes the instance if the Bean is Singleton.
+ * @author Vladimir Aguilar
+ * @author Jose Mesén
+ * @author Rodrigo Acuña
+ */
 public class Bean
 {
     private String id;
     private Object instance;
     private String classType;
-    private List<Class<?>> implementedInterfaces;
     private String init;
     private String destroy;
     private ScopeEnum scopeType;
@@ -45,14 +50,6 @@ public class Bean
 
     public void setClassType(String classType) {
         this.classType = classType;
-    }
-
-    public List<Class<?>> getImplementedInterfaces() {
-        return this.implementedInterfaces;
-    }
-
-    public void setImplementedInterfaces(List<Class<?>> implementedInterfaces) {
-        this.implementedInterfaces = implementedInterfaces;
     }
 
     public String getInit() {

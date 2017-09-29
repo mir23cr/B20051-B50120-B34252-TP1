@@ -1,8 +1,8 @@
 package enums;
 
 /**
+ * Enum with the elements that a parameter could have.
  * @author Vladimir Aguilar
- * Creation Date: 13/9/2017
  */
 public enum ParameterElement {
     NAME,

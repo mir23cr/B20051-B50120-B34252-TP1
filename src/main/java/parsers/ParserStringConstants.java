@@ -1,10 +1,10 @@
 package parsers;
 
 /**
+ * Contains constants for the XML file parsing.
  * @author Rodrigo Acuña
  * @author Vladimir Aguilar
  * @author José Mesén
- * Creation Date: 9/9/2017
  */
 public class ParserStringConstants {
     public static final String BEANS_LABEL = "beans";

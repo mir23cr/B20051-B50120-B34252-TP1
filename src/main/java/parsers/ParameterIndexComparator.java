@@ -6,8 +6,8 @@ import bean.Parameter;
 import java.util.Comparator;
 
 /**
+ * Comparator for the list of parameters.
  * @author Vladimir Aguilar
- * Creation Date: 18/9/2017
  */
 @Scope
 public class ParameterIndexComparator implements Comparator<Parameter>{

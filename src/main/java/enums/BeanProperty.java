@@ -1,7 +1,9 @@
 package enums;
 
+
 /**
- * Creation Date: 9/9/2017
+ * Enum with the attributes that bean could have.
+ * @author Vladimir Aguilar
  */
 public enum BeanProperty {
     ID,
@@ -15,19 +17,27 @@ public enum BeanProperty {
     public static BeanProperty getProperty(String propertyName){
         propertyName = propertyName.toLowerCase();
         BeanProperty property = ERROR;
-        if(propertyName.equals("id")){
-            property = ID;
-        }else if(propertyName.equals("class")){
-            property = CLASS;
-        }else if(propertyName.equals("init-method")){
-            property = INIT;
-        }else if(propertyName.equals("destroy-method")){
-            property = DESTROY;
-        }else if(propertyName.equals("scope")){
-            property = SCOPE;
-        }else if(propertyName.equals("lazy-init")){
-            property = LAZYINIT;
+        switch (propertyName){
+            case "id":
+                property = ID;
+                break;
+            case "class":
+                property = CLASS;
+                break;
+            case "init-method":
+                property = INIT;
+                break;
+            case "destroy-method":
+                property = DESTROY;
+                break;
+            case "scope":
+                property = SCOPE;
+                break;
+            case "lazy-init":
+                property = LAZYINIT;
+                break;
         }
+
         return property;
     }
 }

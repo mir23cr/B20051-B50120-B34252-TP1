@@ -21,7 +21,6 @@ import tests.family.pets.Cat;
 
 /**
  * Parser for the XML Files.
- *
  * @author Rodrigo Acuña
  * @author Vladimir Aguilar
  * @author José Mesén
@@ -117,33 +116,26 @@ public class XmlParser implements Parser {
                 propertyValue = beanDefinition.getAttribute(j).getValue();
                 switch (beanProperty){
                     case ID:
-                        //System.out.print("Se vio un id ");
                         newBean.setId(propertyValue);
                         break;
                     case CLASS:
-                        //System.out.print("Se vio un class ");
                         newBean.setClassType(propertyValue);
                         break;
                     case INIT:
-                        //System.out.print("Se vio un init ");
                         newBean.setInit(propertyValue);
                         break;
                     case DESTROY:
-                        //System.out.print("Se vio un destroy ");
                         newBean.setDestroy(propertyValue);
                         break;
                     case SCOPE:
-                        //System.out.print("Se vio un scope ");
                         newBean.setScopeType(ScopeEnum.valueOf(propertyValue.toUpperCase()));
                         break;
                     case LAZYINIT:
                         newBean.setLazyInit(Boolean.parseBoolean(propertyValue));
                         break;
                     default:
-                        //System.out.println("Error");
                         break;
                 }
-                //System.out.println(beanDefinition.getAttribute(j).getValue());
             }
 
             this.getBeanArgs(beanDefinition.getChildElements(), newBean);

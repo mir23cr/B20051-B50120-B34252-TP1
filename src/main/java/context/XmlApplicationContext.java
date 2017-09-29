@@ -2,7 +2,11 @@ package context;
 
 import parsers.XmlParser;
 
-
+/**
+ * Application context for XML based container.
+ * @author Vladimir Aguilar
+ * @author Jose Mesén
+ */
 public  class XmlApplicationContext extends ApplicationContext {
     private XmlParser xmlParser;
 
@@ -10,7 +14,6 @@ public  class XmlApplicationContext extends ApplicationContext {
         try {
             this.xmlParser = new XmlParser(fileName);
             this.registerBeans();
-            //this.injectDependencies();
         }catch (Exception e){
             e.printStackTrace();
         }
