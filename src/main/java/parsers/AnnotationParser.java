@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import bean.Parameter;
+import enums.ComponentEnum;
 import enums.ScopeEnum;
 import sun.reflect.annotation.AnnotationSupport;
 
@@ -108,14 +109,18 @@ public class AnnotationParser implements Parser {
         Bean bean = null;
         try {
             Class currentClass = Class.forName(classPath);
+            Annotation componentAnnotation = getComponentAnnotation(currentClass);
             //Revisar si es un componente
-            if (currentClass.isAnnotationPresent(Component.class)) {
+            if (componentAnnotation != null) {
                 //Se crea el bean.
                 bean = new Bean();
                 //Asignar class
                 bean.setClassType(classPath);
+                //Asignar component type
+                ComponentEnum componentType = getComponentType(componentAnnotation);
+                bean.setComponentEnum(componentType);
                 //Asignar bean id
-                String id = getBeanId(currentClass);
+                String id = getBeanId(currentClass,componentType);
                 bean.setId(id);
                 //Asignar scope
                 ScopeEnum scope = getScope(currentClass);
@@ -147,6 +152,45 @@ public class AnnotationParser implements Parser {
     }
 
     /**
+     * Este metodo indica el tipo de componente qeu la clase que se esta examinando es.
+     * Esto se almacena como metadatos en el Bean que se crea para la clase.
+     * @param componentAnnotation
+     * @return Tipo de Componente.
+     */
+    private ComponentEnum getComponentType(Annotation componentAnnotation) {
+        ComponentEnum componentEnum = ComponentEnum.COMPONENT;
+        switch (componentAnnotation.annotationType().getSimpleName()){
+            case "Repository":
+                componentEnum = ComponentEnum.REPOSITORY;
+                break;
+            case "Service":
+                componentEnum = ComponentEnum.SERVICE;
+                break;
+            case "Controller":
+                componentEnum = ComponentEnum.CONTROLLER;
+                break;
+        }
+        return componentEnum;
+    }
+
+    /**
+     * Este método analiza si alguna de las anotaciones de la clase que se esta examinando
+     * indica que es un componente que se desea escanear y crear un bean. De ser asi
+     * devuelve la anotación que lo indica de lo contrario devuelve null.
+     * @param currentClass
+     * @return Anotación que indica que la clase es un componente.
+     */
+    private Annotation getComponentAnnotation(Class currentClass) {
+        Annotation componentAnnotation = null;
+        Annotation[] annotations = currentClass.getAnnotations();
+        for (Annotation annotation : annotations) {
+            if(annotation.annotationType().isAnnotationPresent(Component.class))
+                componentAnnotation = annotation;
+        }
+        return componentAnnotation;
+    }
+
+    /**
      * Este método se encarga de revisar la anotación de componente que tiene la clase para verificar si se ingresó
      * un beanId. Si es así lo devuelve, de lo contario genera uno con el nombre de la clase y la primer letra en minúscula
      * si solamente la primer letra de la clase es mayúscula. Ej: CatClass -> catClass, CATClass -> CATClass.
@@ -154,9 +198,22 @@ public class AnnotationParser implements Parser {
      * @param currentClass
      * @return beanId of the scanned Class
      */
-    private String getBeanId(Class currentClass) {
-        Component componentAnnotation = (Component) currentClass.getAnnotation(Component.class);
-        String annotationValue = componentAnnotation.value();
+    private String getBeanId(Class currentClass,ComponentEnum componentType) {
+        String annotationValue = "null";
+        switch (componentType){
+            case COMPONENT:
+                annotationValue = ((Component)currentClass.getAnnotation(Component.class)).value();
+                break;
+            case CONTROLLER:
+                annotationValue = ((Controller)currentClass.getAnnotation(Controller.class)).value();
+                break;
+            case SERVICE:
+                annotationValue = ((Service)currentClass.getAnnotation(Service.class)).value();
+                break;
+            case REPOSITORY:
+                annotationValue = ((Repository)currentClass.getAnnotation(Repository.class)).value();
+                break;
+        }
         String className = currentClass.getSimpleName();
         String result;
         if (annotationValue.compareTo("null") != 0)
@@ -299,6 +356,7 @@ public class AnnotationParser implements Parser {
             System.out.println("Bean id: " + element.getKey());
             bean = element.getValue();
             System.out.println(bean.getScopeType());
+            System.out.println(bean.getComponentEnum());
             System.out.println("Tipo de clase: " + bean.getClassType());
             List<Parameter> constructorArguments = bean.getConstructorArguments();
             System.out.println("Argumentos del constructor: " + constructorArguments.size());

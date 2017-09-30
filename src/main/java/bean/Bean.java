@@ -2,6 +2,8 @@ package bean;
 
 import java.util.List;
 
+import annotations.Component;
+import enums.ComponentEnum;
 import enums.ScopeEnum;
 
 /**
@@ -22,6 +24,7 @@ public class Bean
     private List<Parameter> constructorArguments;
     private List<Parameter> properties;
     private Boolean lazyInit;
+    private ComponentEnum componentEnum;
 
 
     public Bean() {
@@ -98,5 +101,13 @@ public class Bean
 
     public void setLazyInit(Boolean lazyInit) {
         this.lazyInit = lazyInit;
+    }
+
+    public ComponentEnum getComponentEnum() {
+        return componentEnum;
+    }
+
+    public void setComponentEnum(ComponentEnum componentEnum) {
+        this.componentEnum = componentEnum;
     }
 }

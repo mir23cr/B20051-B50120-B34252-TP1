@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
  * Anotación que indica el Scopoe que tendrá el Bean, el cual se alamacena en el valor de la anotación.
  * Por defecto el valor es Singleton es decir una sola referencia a todos los llamados a este bean
  * Tambien es posible especificar PROTOTYPE que indica que se desea un nuevo objeto con cada llamado a getBean()
- * Se debe utilizar encima de la declaración de la una clase anotada con @Component
+ * Se debe utilizar encima de la declaración de la una clase anotada con @Component.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
