@@ -1,0 +1,23 @@
+<beans default-init-method="init" default-destroy-method="destroy" lazy-init = "true">
+
+	<bean id="home" class="family.House" init-method="run" destroy-method="close" lazy-init="false">
+		<constructor-arg index = "1" ref="puchin" />
+		<constructor-arg index = "0" ref="pili" />
+		<property name="padre" class="family.Person"/>
+	</bean>
+
+	<bean id="daddy" class="family.Person">
+	</bean>
+
+	<bean id="pili" class="family.pets.Dog">
+	</bean>
+
+
+	<bean id="puchin" class="family.pets.Cat" scope="prototype">
+
+	</bean>
+
+
+	<bean id="lacho" class="family.House" init-method="run" destroy-method="close">
+	</bean>
+</beans>
