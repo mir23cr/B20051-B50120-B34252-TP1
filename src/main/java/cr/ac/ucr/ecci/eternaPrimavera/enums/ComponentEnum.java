@@ -1,4 +1,4 @@
-package enums;
+package cr.ac.ucr.ecci.eternaPrimavera.enums;
 
 /**
  * Indicates what type of Component the bean specifically is

@@ -1,8 +1,6 @@
-package parsers;
+package cr.ac.ucr.ecci.eternaPrimavera.parsers;
 
-import annotations.*;
-import enums.AutowireMode;
-import bean.Bean;
+
 
 import java.io.File;
 import java.lang.annotation.Annotation;
@@ -13,10 +11,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import bean.Parameter;
-import enums.ComponentEnum;
-import enums.ScopeEnum;
-import sun.reflect.annotation.AnnotationSupport;
+import cr.ac.ucr.ecci.eternaPrimavera.annotations.*;
+import cr.ac.ucr.ecci.eternaPrimavera.bean.Bean;
+import cr.ac.ucr.ecci.eternaPrimavera.bean.Parameter;
+import cr.ac.ucr.ecci.eternaPrimavera.enums.AutowireMode;
+import cr.ac.ucr.ecci.eternaPrimavera.enums.ComponentEnum;
+import cr.ac.ucr.ecci.eternaPrimavera.enums.ScopeEnum;
+
 
 /**
  * Esta clase se encarga de analizar el paquete cuya dirección recibe como parámetro del constructor e

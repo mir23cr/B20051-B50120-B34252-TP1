@@ -1,8 +1,6 @@
 package cr.ac.ucr.ecci.eternaPrimavera.annotations;
 
-import cr.ac.ucr.ecci.eternaPrimavera.annotations.Component;
-
-import enums.ComponentEnum;
+import cr.ac.ucr.ecci.eternaPrimavera.enums.ComponentEnum;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -1,10 +1,11 @@
-package bean;
+package cr.ac.ucr.ecci.eternaPrimavera.bean;
 
 import java.util.List;
 
-import annotations.Component;
-import enums.ComponentEnum;
-import enums.ScopeEnum;
+
+import cr.ac.ucr.ecci.eternaPrimavera.enums.ComponentEnum;
+import cr.ac.ucr.ecci.eternaPrimavera.enums.ScopeEnum;
+
 
 /**
  * Class that stores the meta-data for the instances of the bean.
