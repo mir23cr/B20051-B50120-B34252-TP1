@@ -8,7 +8,7 @@ import family.Person;
  * @author Vladimir Aguilar
  * Creation Date: 18/9/2017
  */
-@Controller
+@Controller("puchin")
 @Scope(ScopeEnum.PROTOTYPE)
 public class Cat {
     private String name;

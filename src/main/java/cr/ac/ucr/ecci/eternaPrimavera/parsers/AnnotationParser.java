@@ -1,6 +1,10 @@
 package cr.ac.ucr.ecci.eternaPrimavera.parsers;
 
-
+import cr.ac.ucr.ecci.eternaPrimavera.annotations.*;
+import cr.ac.ucr.ecci.eternaPrimavera.bean.Parameter;
+import cr.ac.ucr.ecci.eternaPrimavera.enums.AutowireMode;
+import cr.ac.ucr.ecci.eternaPrimavera.bean.Bean;
+import cr.ac.ucr.ecci.eternaPrimavera.enums.ScopeEnum;
 
 import java.io.File;
 import java.lang.annotation.Annotation;
@@ -46,7 +50,7 @@ public class AnnotationParser implements Parser {
     public AnnotationParser(String packageLocation) {
         userPackageSpecification = packageLocation;
         //linea de stack overflow
-        String classesRootDirectory = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+        String classesRootDirectory = System.getProperty("user.dir") + "/target/classes/";
         classesRootDirectory = classesRootDirectory.replace("%20", " ");
 
         File basePackage = new File(classesRootDirectory + packageLocation.replace(".", "/"));
