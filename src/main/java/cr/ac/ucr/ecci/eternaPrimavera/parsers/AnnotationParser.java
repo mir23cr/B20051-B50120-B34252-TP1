@@ -7,7 +7,6 @@ import cr.ac.ucr.ecci.eternaPrimavera.bean.Bean;
 import cr.ac.ucr.ecci.eternaPrimavera.enums.ScopeEnum;
 
 import java.io.File;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.HashMap;
