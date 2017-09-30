@@ -340,7 +340,7 @@ public abstract class ApplicationContext {
             Method destroyMethod;
             for (Map.Entry<String,Bean> element : container.entrySet()){
                 if(element.getValue().getScopeType() == ScopeEnum.SINGLETON){
-                    if(element.getValue().getDestroy()!= null){
+                    if(element.getValue().getInstance() != null && element.getValue().getDestroy()!= null){
                         destroyMethod = Class.forName(element.getValue().getClassType()).getMethod(element.getValue().getDestroy());
                         destroyMethod.invoke(element.getValue().getInstance());
                     }
