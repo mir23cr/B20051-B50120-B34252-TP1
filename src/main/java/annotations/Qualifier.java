@@ -8,7 +8,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Created by Rodrigo on 9/9/2017.
+ * Anotación que indica que la inyección de una dependecia se desea hacer por nombre AutowireBYNAME.
+ * Se almacena dentro de su valor la referencia al bean que se desea inyectar.
+ * Se debe utilzar la anotación antes de un parametro
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.PARAMETER)

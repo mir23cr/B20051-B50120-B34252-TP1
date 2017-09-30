@@ -1,5 +1,7 @@
 package tests.family.pets;
 
+import annotations.Component;
+
 /**
  * @author Vladimir Aguilar
  * Creation Date: 18/9/2017

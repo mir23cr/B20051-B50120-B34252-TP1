@@ -6,10 +6,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Anotación que indica que se desea incializar el objeto de este Bean hasta que se solicite el mismo,
- * de lo contario se incializa en el momento que se registra en el contenedor.
+ * Created by Rodrigo on 9/23/2017.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface Lazy {
+@Component
+public @interface Controller {
+    String value() default "null";
 }
