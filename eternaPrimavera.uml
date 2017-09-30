@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>cr.ac.ucr.ecci.eternaPrimavera</OriginalElement>
+  <nodes>
+    <node x="1728.9628148355127" y="486.0">cr.ac.ucr.ecci.eternaPrimavera.bean.Bean</node>
+    <node x="1166.0" y="1650.5">cr.ac.ucr.ecci.eternaPrimavera.enums.ParameterElement</node>
+    <node x="1259.1623502732054" y="154.0">cr.ac.ucr.ecci.eternaPrimavera.bean.Parameter</node>
+    <node x="1248.1623502732054" y="0.0">cr.ac.ucr.ecci.eternaPrimavera.enums.AutowireMode</node>
+    <node x="2370.6919815021793" y="1082.5">cr.ac.ucr.ecci.eternaPrimavera.annotations.Repository</node>
+    <node x="382.5" y="1614.5">cr.ac.ucr.ecci.eternaPrimavera.parsers.ParserStringConstants</node>
+    <node x="1027.8990756734183" y="2022.0">cr.ac.ucr.ecci.eternaPrimavera.parsers.XmlParser</node>
+    <node x="985.3990756734183" y="2395.0">cr.ac.ucr.ecci.eternaPrimavera.context.XmlApplicationContext</node>
+    <node x="3143.6919815021793" y="1094.5">cr.ac.ucr.ecci.eternaPrimavera.annotations.Qualifier</node>
+    <node x="2806.6919815021793" y="1082.5">cr.ac.ucr.ecci.eternaPrimavera.annotations.Service</node>
+    <node x="817.4999999999999" y="1650.0">cr.ac.ucr.ecci.eternaPrimavera.enums.BeanArgument</node>
+    <node x="2330.642131228974" y="1517.0">cr.ac.ucr.ecci.eternaPrimavera.parsers.AnnotationParser</node>
+    <node x="1205.4248502732055" y="878.0">cr.ac.ucr.ecci.eternaPrimavera.context.ApplicationContext</node>
+    <node x="2935.6919815021793" y="607.0">cr.ac.ucr.ecci.eternaPrimavera.annotations.Component</node>
+    <node x="3326.6919815021793" y="1082.5">cr.ac.ucr.ecci.eternaPrimavera.annotations.Controller</node>
+    <node x="2423.642131228974" y="2130.5">cr.ac.ucr.ecci.eternaPrimavera.context.AnnotationApplicationContext</node>
+    <node x="1411.4248502732055" y="1686.5">cr.ac.ucr.ecci.eternaPrimavera.parsers.ParameterIndexComparator</node>
+    <node x="1705.7165169398722" y="215.0">cr.ac.ucr.ecci.eternaPrimavera.enums.ScopeEnum</node>
+    <node x="3662.6919815021793" y="1106.5">cr.ac.ucr.ecci.eternaPrimavera.annotations.PreDestroy</node>
+    <node x="2706.6919815021793" y="1106.5">cr.ac.ucr.ecci.eternaPrimavera.annotations.Lazy</node>
+    <node x="1882.9248502732057" y="1094.5">cr.ac.ucr.ecci.eternaPrimavera.parsers.Parser</node>
+    <node x="2227.6919815021793" y="1106.5">cr.ac.ucr.ecci.eternaPrimavera.annotations.Autowired</node>
+    <node x="3810.6919815021797" y="1106.5">cr.ac.ucr.ecci.eternaPrimavera.annotations.PostConstruct</node>
+    <node x="58.5" y="1602.0">cr.ac.ucr.ecci.eternaPrimavera.enums.BeanProperty</node>
+    <node x="2760.4248502732057" y="191.0">cr.ac.ucr.ecci.eternaPrimavera.enums.ComponentEnum</node>
+    <node x="1596.4248502732055" y="1094.5">cr.ac.ucr.ecci.eternaPrimavera.annotations.Scope</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.context.AnnotationApplicationContext" target="cr.ac.ucr.ecci.eternaPrimavera.parsers.AnnotationParser">
+      <point x="0.0" y="-53.0" />
+      <point x="52.5" y="197.5" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.bean.Bean" target="cr.ac.ucr.ecci.eternaPrimavera.enums.ScopeEnum">
+      <point x="27.416666666666657" y="-161.0" />
+      <point x="1920.8794815021795" y="406.0" />
+      <point x="1803.9665169398722" y="406.0" />
+      <point x="32.75" y="40.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.parsers.XmlParser" target="cr.ac.ucr.ecci.eternaPrimavera.bean.Parameter">
+      <point x="-160.80000000000018" y="-161.5" />
+      <point x="1068.0990756734182" y="1992.0" />
+      <point x="28.0" y="1992.0" />
+      <point x="28.0" y="406.0" />
+      <point x="1275.5373502732054" y="406.0" />
+      <point x="-114.625" y="101.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.parsers.AnnotationParser" target="cr.ac.ucr.ecci.eternaPrimavera.annotations.PreDestroy">
+      <point x="132.63157894736833" y="-197.5" />
+      <point x="2673.2737101763423" y="1467.0" />
+      <point x="3726.1919815021793" y="1467.0" />
+      <point x="0.0" y="16.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.parsers.Parser" target="cr.ac.ucr.ecci.eternaPrimavera.bean.Bean">
+      <point x="0.0" y="-28.0" />
+      <point x="1997.4248502732057" y="858.0" />
+      <point x="1930.0183703910684" y="858.0" />
+      <point x="36.55555555555554" y="161.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.context.ApplicationContext" target="cr.ac.ucr.ecci.eternaPrimavera.bean.Parameter">
+      <point x="-74.19999999999993" y="-244.5" />
+      <point x="1316.7248502732054" y="858.0" />
+      <point x="1312.5625" y="858.0" />
+      <point x="1312.5625" y="436.0" />
+      <point x="1373.7873502732054" y="436.0" />
+      <point x="-16.375" y="101.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.parsers.XmlParser" target="cr.ac.ucr.ecci.eternaPrimavera.enums.BeanProperty">
+      <point x="-134.0" y="-161.5" />
+      <point x="1094.8990756734183" y="1982.0" />
+      <point x="286.5" y="1982.0" />
+      <point x="76.0" y="112.5" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.annotations.Controller" target="cr.ac.ucr.ecci.eternaPrimavera.enums.ComponentEnum">
+      <point x="79.0" y="-40.0" />
+      <point x="3563.6919815021793" y="446.0" />
+      <point x="2894.7819931303484" y="446.0" />
+      <point x="48.857142857142776" y="64.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.context.XmlApplicationContext" target="cr.ac.ucr.ecci.eternaPrimavera.context.ApplicationContext">
+      <point x="-95.33333333333326" y="-53.0" />
+      <point x="1033.065742340085" y="2370.0" />
+      <point x="6.0" y="2370.0" />
+      <point x="6.0" y="1497.0" />
+      <point x="1298.1748502732055" y="1497.0" />
+      <point x="-92.75" y="244.5" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.annotations.Component" target="cr.ac.ucr.ecci.eternaPrimavera.enums.ComponentEnum">
+      <point x="0.0" y="-40.0" />
+      <point x="3093.6919815021793" y="456.0" />
+      <point x="2870.3534217017773" y="456.0" />
+      <point x="24.42857142857156" y="64.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.parsers.AnnotationParser" target="cr.ac.ucr.ecci.eternaPrimavera.enums.ScopeEnum">
+      <point x="-44.21052631578948" y="-197.5" />
+      <point x="2496.4316049131844" y="1397.0" />
+      <point x="2217.1919815021797" y="1397.0" />
+      <point x="2217.1919815021797" y="376.0" />
+      <point x="1825.7998502732057" y="376.0" />
+      <point x="54.583333333333314" y="40.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.parsers.XmlParser" target="cr.ac.ucr.ecci.eternaPrimavera.bean.Bean">
+      <point x="107.20000000000005" y="-161.5" />
+      <point x="1336.0990756734184" y="1972.0" />
+      <point x="1872.4248502732057" y="1972.0" />
+      <point x="1872.4248502732057" y="858.0" />
+      <point x="1893.4628148355127" y="858.0" />
+      <point x="0.0" y="161.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.annotations.Controller" target="cr.ac.ucr.ecci.eternaPrimavera.annotations.Component">
+      <point x="-79.0" y="-40.0" />
+      <point x="3405.6919815021793" y="858.0" />
+      <point x="3212.1919815021793" y="858.0" />
+      <point x="118.5" y="40.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.bean.Bean" target="cr.ac.ucr.ecci.eternaPrimavera.bean.Parameter">
+      <point x="-82.25000000000003" y="-161.0" />
+      <point x="1811.2128148355127" y="426.0" />
+      <point x="1439.2873502732054" y="426.0" />
+      <point x="49.125" y="101.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.parsers.AnnotationParser" target="cr.ac.ucr.ecci.eternaPrimavera.parsers.Parser">
+      <point x="-176.84210526315792" y="-197.5" />
+      <point x="2363.800025965816" y="1457.0" />
+      <point x="2054.6748502732057" y="1457.0" />
+      <point x="57.25" y="28.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.bean.Parameter" target="cr.ac.ucr.ecci.eternaPrimavera.enums.AutowireMode">
+      <point x="-65.5" y="-101.0" />
+      <point x="-1.4210854715202004E-14" y="52.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.parsers.XmlParser" target="cr.ac.ucr.ecci.eternaPrimavera.enums.ScopeEnum">
+      <point x="-26.800000000000182" y="-161.5" />
+      <point x="1202.0990756734182" y="1942.0" />
+      <point x="1152.0" y="1942.0" />
+      <point x="1152.0" y="446.0" />
+      <point x="1716.633183606539" y="446.0" />
+      <point x="-54.583333333333314" y="40.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.parsers.AnnotationParser" target="cr.ac.ucr.ecci.eternaPrimavera.bean.Bean">
+      <point x="-132.63157894736844" y="-197.5" />
+      <point x="2408.0105522816057" y="1437.0" />
+      <point x="2133.4248502732057" y="1437.0" />
+      <point x="2133.4248502732057" y="838.0" />
+      <point x="2003.1294815021795" y="838.0" />
+      <point x="109.66666666666663" y="161.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.parsers.AnnotationParser" target="cr.ac.ucr.ecci.eternaPrimavera.annotations.Qualifier">
+      <point x="88.42105263157896" y="-197.5" />
+      <point x="2629.0631838605527" y="1447.0" />
+      <point x="3225.1919815021793" y="1447.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.annotations.Service" target="cr.ac.ucr.ecci.eternaPrimavera.annotations.Component">
+      <point x="79.0" y="-40.0" />
+      <point x="3043.6919815021793" y="858.0" />
+      <point x="3054.1919815021793" y="858.0" />
+      <point x="-39.5" y="40.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.enums.BeanArgument" target="cr.ac.ucr.ecci.eternaPrimavera.enums.BeanArgument">
+      <point x="-81.0" y="64.5" />
+      <point x="898.4999999999999" y="1799.0" />
+      <point x="797.5" y="1799.0" />
+      <point x="797.5" y="1714.5" />
+      <point x="-162.0" y="-0.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.annotations.Repository" target="cr.ac.ucr.ecci.eternaPrimavera.enums.ComponentEnum">
+      <point x="-79.0" y="-40.0" />
+      <point x="2449.6919815021793" y="466.0" />
+      <point x="2821.496278844634" y="466.0" />
+      <point x="-24.42857142857133" y="64.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.parsers.XmlParser" target="cr.ac.ucr.ecci.eternaPrimavera.parsers.AnnotationParser">
+      <point x="160.79999999999995" y="-161.5" />
+      <point x="1389.6990756734183" y="1992.0" />
+      <point x="2383.142131228974" y="1992.0" />
+      <point x="-157.5" y="197.5" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.context.XmlApplicationContext" target="cr.ac.ucr.ecci.eternaPrimavera.parsers.XmlParser">
+      <point x="0.0" y="-53.0" />
+      <point x="-100.5" y="161.5" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.annotations.Service" target="cr.ac.ucr.ecci.eternaPrimavera.enums.ComponentEnum">
+      <point x="-79.0" y="-40.0" />
+      <point x="2885.6919815021793" y="466.0" />
+      <point x="2845.9248502732057" y="466.0" />
+      <point x="0.0" y="64.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.context.ApplicationContext" target="cr.ac.ucr.ecci.eternaPrimavera.bean.Bean">
+      <point x="74.20000000000005" y="-244.5" />
+      <point x="1465.1248502732055" y="848.0" />
+      <point x="1747.2405926132906" y="848.0" />
+      <point x="-146.22222222222223" y="161.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.parsers.XmlParser" target="cr.ac.ucr.ecci.eternaPrimavera.parsers.ParameterIndexComparator">
+      <point x="26.799999999999955" y="-161.5" />
+      <point x="1255.6990756734183" y="1942.0" />
+      <point x="1568.4248502732055" y="1942.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.parsers.AnnotationParser" target="cr.ac.ucr.ecci.eternaPrimavera.annotations.Scope">
+      <point x="-198.94736842105272" y="-197.5" />
+      <point x="2341.694762807921" y="1467.0" />
+      <point x="1747.9248502732055" y="1467.0" />
+      <point x="50.5" y="28.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.parsers.ParameterIndexComparator" target="cr.ac.ucr.ecci.eternaPrimavera.annotations.Scope">
+      <point x="78.5" y="-28.0" />
+      <point x="-50.5" y="28.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.context.ApplicationContext" target="cr.ac.ucr.ecci.eternaPrimavera.enums.AutowireMode">
+      <point x="-148.39999999999986" y="-244.5" />
+      <point x="1242.5248502732056" y="858.0" />
+      <point x="1233.810738416989" y="858.0" />
+      <point x="1233.810738416989" y="134.0" />
+      <point x="1294.0623502732055" y="134.0" />
+      <point x="-30.600000000000023" y="52.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.parsers.ParameterIndexComparator" target="cr.ac.ucr.ecci.eternaPrimavera.bean.Parameter">
+      <point x="-78.5" y="-28.0" />
+      <point x="1489.9248502732055" y="1487.0" />
+      <point x="985.823925946624" y="1487.0" />
+      <point x="985.823925946624" y="426.0" />
+      <point x="1341.0373502732054" y="426.0" />
+      <point x="-49.125" y="101.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.parsers.AnnotationParser" target="cr.ac.ucr.ecci.eternaPrimavera.enums.ComponentEnum">
+      <point x="154.73684210526312" y="-197.5" />
+      <point x="2695.378973334237" y="1477.0" />
+      <point x="3800.1919815021793" y="1477.0" />
+      <point x="3800.1919815021793" y="436.0" />
+      <point x="2919.21056455892" y="436.0" />
+      <point x="73.28571428571433" y="64.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.parsers.AnnotationParser" target="cr.ac.ucr.ecci.eternaPrimavera.annotations.Lazy">
+      <point x="22.105263157894797" y="-197.5" />
+      <point x="2562.7473943868686" y="1417.0" />
+      <point x="2746.6919815021793" y="1417.0" />
+      <point x="0.0" y="16.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.parsers.XmlParser" target="cr.ac.ucr.ecci.eternaPrimavera.parsers.Parser">
+      <point x="134.0" y="-161.5" />
+      <point x="1362.8990756734183" y="1982.0" />
+      <point x="1940.1748502732057" y="1982.0" />
+      <point x="-57.25" y="28.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.parsers.AnnotationParser" target="cr.ac.ucr.ecci.eternaPrimavera.annotations.PostConstruct">
+      <point x="176.84210526315792" y="-197.5" />
+      <point x="2717.484236492132" y="1487.0" />
+      <point x="3885.1919815021797" y="1487.0" />
+      <point x="0.0" y="16.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.bean.Bean" target="cr.ac.ucr.ecci.eternaPrimavera.enums.ComponentEnum">
+      <point x="137.08333333333337" y="-161.0" />
+      <point x="2030.5461481688462" y="456.0" />
+      <point x="2797.0677074160626" y="456.0" />
+      <point x="-48.85714285714289" y="64.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.context.AnnotationApplicationContext" target="cr.ac.ucr.ecci.eternaPrimavera.context.ApplicationContext">
+      <point x="-113.0" y="-53.0" />
+      <point x="2480.142131228974" y="1952.0" />
+      <point x="1835.1748502732057" y="1952.0" />
+      <point x="1835.1748502732057" y="1477.0" />
+      <point x="1483.6748502732055" y="1477.0" />
+      <point x="92.75" y="244.5" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.parsers.AnnotationParser" target="cr.ac.ucr.ecci.eternaPrimavera.enums.AutowireMode">
+      <point x="198.94736842105272" y="-197.5" />
+      <point x="2739.5894996500265" y="1497.0" />
+      <point x="3970.1919815021793" y="1497.0" />
+      <point x="3970.1919815021793" y="124.0" />
+      <point x="1385.8623502732055" y="124.0" />
+      <point x="61.19999999999999" y="52.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.annotations.Repository" target="cr.ac.ucr.ecci.eternaPrimavera.annotations.Component">
+      <point x="79.0" y="-40.0" />
+      <point x="2607.6919815021793" y="858.0" />
+      <point x="2975.1919815021793" y="858.0" />
+      <point x="-118.5" y="40.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.annotations.Scope" target="cr.ac.ucr.ecci.eternaPrimavera.enums.ScopeEnum">
+      <point x="0.0" y="-28.0" />
+      <point x="1697.4248502732055" y="466.0" />
+      <point x="1760.2998502732057" y="466.0" />
+      <point x="-10.916666666666686" y="40.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.parsers.AnnotationParser" target="cr.ac.ucr.ecci.eternaPrimavera.annotations.Repository">
+      <point x="0.0" y="-197.5" />
+      <point x="2540.642131228974" y="1497.0" />
+      <point x="2528.6919815021793" y="1497.0" />
+      <point x="0.0" y="40.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.parsers.AnnotationParser" target="cr.ac.ucr.ecci.eternaPrimavera.bean.Parameter">
+      <point x="-88.42105263157896" y="-197.5" />
+      <point x="2452.221078597395" y="1417.0" />
+      <point x="2155.4248502732057" y="1417.0" />
+      <point x="2155.4248502732057" y="396.0" />
+      <point x="1472.0373502732054" y="396.0" />
+      <point x="81.875" y="101.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.parsers.XmlParser" target="cr.ac.ucr.ecci.eternaPrimavera.enums.AutowireMode">
+      <point x="-187.60000000000014" y="-161.5" />
+      <point x="1041.2990756734182" y="2002.0" />
+      <point x="17.0" y="2002.0" />
+      <point x="17.0" y="124.0" />
+      <point x="1263.4623502732056" y="124.0" />
+      <point x="-61.200000000000045" y="52.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.parsers.XmlParser" target="cr.ac.ucr.ecci.eternaPrimavera.enums.BeanArgument">
+      <point x="-53.600000000000136" y="-161.5" />
+      <point x="1175.2990756734182" y="1952.0" />
+      <point x="1060.5" y="1952.0" />
+      <point x="81.0" y="64.5" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.parsers.AnnotationParser" target="cr.ac.ucr.ecci.eternaPrimavera.annotations.Autowired">
+      <point x="-22.105263157894797" y="-197.5" />
+      <point x="2518.536868071079" y="1387.0" />
+      <point x="2289.1919815021793" y="1387.0" />
+      <point x="0.0" y="16.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.parsers.XmlParser" target="cr.ac.ucr.ecci.eternaPrimavera.enums.ParameterElement">
+      <point x="0.0" y="-161.5" />
+      <point x="1228.8990756734183" y="1932.0" />
+      <point x="1255.5" y="1932.0" />
+      <point x="0.0" y="64.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.parsers.AnnotationParser" target="cr.ac.ucr.ecci.eternaPrimavera.annotations.Service">
+      <point x="44.21052631578948" y="-197.5" />
+      <point x="2584.852657544763" y="1427.0" />
+      <point x="2964.6919815021793" y="1427.0" />
+      <point x="0.0" y="40.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.enums.BeanProperty" target="cr.ac.ucr.ecci.eternaPrimavera.enums.BeanProperty">
+      <point x="-76.0" y="112.5" />
+      <point x="134.5" y="1847.0" />
+      <point x="38.5" y="1847.0" />
+      <point x="38.5" y="1714.5" />
+      <point x="-152.0" y="-0.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.context.ApplicationContext" target="cr.ac.ucr.ecci.eternaPrimavera.enums.ScopeEnum">
+      <point x="0.0" y="-244.5" />
+      <point x="1390.9248502732055" y="858.0" />
+      <point x="1384.7873502732054" y="858.0" />
+      <point x="1384.7873502732054" y="456.0" />
+      <point x="1738.4665169398722" y="456.0" />
+      <point x="-32.75" y="40.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.parsers.AnnotationParser" target="cr.ac.ucr.ecci.eternaPrimavera.annotations.Component">
+      <point x="66.31578947368416" y="-197.5" />
+      <point x="2606.957920702658" y="1437.0" />
+      <point x="3133.1919815021793" y="1437.0" />
+      <point x="39.5" y="40.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.parsers.XmlParser" target="cr.ac.ucr.ecci.eternaPrimavera.parsers.ParserStringConstants">
+      <point x="-107.20000000000005" y="-161.5" />
+      <point x="1121.6990756734183" y="1972.0" />
+      <point x="579.5" y="1972.0" />
+      <point x="0.0" y="100.0" />
+    </edge>
+    <edge source="cr.ac.ucr.ecci.eternaPrimavera.parsers.AnnotationParser" target="cr.ac.ucr.ecci.eternaPrimavera.annotations.Controller">
+      <point x="110.52631578947376" y="-197.5" />
+      <point x="2651.1684470184478" y="1457.0" />
+      <point x="3484.6919815021793" y="1457.0" />
+      <point x="0.0" y="40.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.8461035098155859" x="1473.0487238979117" y="1430.4868171271883" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
