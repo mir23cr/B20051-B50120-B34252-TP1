@@ -1,0 +1,17 @@
+<beans default-init-method="init" default-destroy-method="destroy" lazy-init = "false">
+
+	<component-scan base-package="family"/>
+
+	<bean id="home" class="family.House" init-method="run" destroy-method="close">
+		<constructor-arg index = "1" class="family.pets.Cat" />
+		<constructor-arg index = "0" ref="pili" />
+		<property name="padre" ref="daddy"/>
+	</bean>
+
+	<bean id="daddy" class="family.Person">
+	</bean>
+
+	<bean id="pili" class="family.pets.Dog">
+	</bean>
+
+</beans>
